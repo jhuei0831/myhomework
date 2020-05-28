@@ -1,5 +1,5 @@
 @extends('layouts.manage.app')
-@section('title', trans('action.user.title').trans('action.create'))
+@section('title', trans('action.user.title').trans('action.manage'))
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -14,32 +14,38 @@
 					@csrf
 					<ul class="list-inline">
 						<li class="list-inline-item">{{ App\Button::Create() }}</li>
-						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('Filter') }}</a></li>
-						<li class="list-inline-item collapse" id="search"><button type="submit" class="btn btn-sm btn-secondary"><i class="fas fa-search"></i> {{ trans('Search') }}</button></li>
+						<li class="list-inline-item">
+                            <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('Filter') }}</a>
+                        </li>
 					</ul>
 					{{-- 篩選器設定 --}}
                     <div class="collapse" id="search">
-	                    <div class="form-group">
-							<label class='col-md-2 col-form-label text-md-right'>{{ trans('action.user.name') }}</label>
-							<div class='col-md-3'>
-								<input type="text" class="form-control" name="name">
+	                    <div class="form-row">
+							<div class='form-group col-md-3'>
+                                <label for="name">{{ trans('action.user.name') }}</label>
+								<input type="text" class="form-control" name="name" id="name">
 							</div>
-							<label class='col-md-2 col-form-label text-md-right'>{{ trans('action.user.email') }}</label>
-							<div class='col-md-3'>
-								<input type="text" class="form-control" name="email">
+							<div class='form-group col-md-3'>
+                                <label for="email">{{ trans('action.user.email') }}</label>
+								<input type="text" class="form-control" name="email" id="email">
 							</div>
-						</div>
-						<div class="form-group">
 							{{-- 選擇隱藏爛位 --}}
-							<label class='col-md-2 col-form-label text-md-right'>{{ trans('action.user.permission') }}</label>
-							<div class='col-md-3'>
-								<select class="form-control" name="permission">
+							<div class='form-group col-md-3'>
+                                <label for="permission">{{ trans('action.user.permission') }}</label>
+								<select class="form-control" name="permission" id="permission">
 									<option value="">{{ trans('All') }}</option>
 									@foreach (App\Enum::permission as $key => $value)
-										<option value="{{ $key }}">{{ $value }}</option>
+										<option value="{{ $key }}">{{ trans($value) }}</option>
 									@endforeach
 								</select>
 							</div>
+                            <div class='form-group col-md-3'>
+                                <label for="student_id">{{ trans('action.user.student_id') }}</label>
+                                <input type="text" class="form-control" name="student_id" id="student_id">
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-search"></i> {{ trans('action.search') }}
+                            </button>
 						</div>
 					</div>
 					</form>
@@ -64,11 +70,11 @@
 										<td style="display:none">{{ $user->permission }}</td>
 										<td>{{ trans(App\Enum::permission[$user->permission]) }}</td>
 										<td>
-                                            <form action="{{ route('member.edit',$user->id) }}" method="GET">
+                                            <form class="d-inline" action="{{ route('member.edit',$user->id) }}" method="GET">
                                                 @csrf
                                                 {{ App\Button::edit($user->id) }}
                                             </form>
-                                            <form  action="{{ route('member.destroy',$user->id) }}" method="POST">
+                                            <form class="d-inline" action="{{ route('member.destroy',$user->id) }}" method="POST">
                                                 @method('DELETE')
                                                 @csrf
                                                 {{ App\Button::deleting($user->id) }}

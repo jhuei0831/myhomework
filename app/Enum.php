@@ -12,8 +12,8 @@ class Enum extends Model
         '1' => 'POST',
         '2' => 'GET',
         '3' => 'DELETE',
-        '4' => '排序',
-        '5' => '刪除背景',
+        '4' => 'action.sort',
+        '5' => 'action.delete_background',
     ];
 
     // 使用者瀏覽器

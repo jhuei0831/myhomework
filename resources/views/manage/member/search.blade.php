@@ -1,11 +1,11 @@
 @extends('layouts.manage.app')
-@section('title', __('Member').__('Manage'))
+@section('title', trans('action.user.title').trans('action.manage'))
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Member').__('Manage') }}</div>
+                <div class="card-header">{{ trans('action.user.title').trans('action.manage') }}</div>
 
                 <div class="card-body">
                 	<form action="{{ route('member.search') }}" method="post">
@@ -14,63 +14,69 @@
 						<li class="list-inline-item">{{ App\Button::Create() }}</li>
 						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ __('Filter') }}</a></li>
 						<li class="list-inline-item">{{ App\Button::To(false,route('member.index'),__('Reset'),null,'btn-secondary','undo') }}</li>
-						<li class="list-inline-item collapse" id="search"><button type="submit" class="btn btn-sm btn-secondary"><i class="fas fa-search"></i> {{ __('Search') }}</button></li>
 					</ul>
 					{{-- 篩選器設定 --}}
                     <div class="collapse" id="search">
-	                    <div class="form-group row">
-							<label class='col-md-2 col-form-label text-md-right'>{{ __('Name') }}</label>
-							<div class='col-md-3'>
-								<input type="text" name="name" class="form-control">
-							</div>
-							<label class='col-md-2 col-form-label text-md-right'>{{ __('E-Mail Address') }}</label>
-							<div class='col-md-3'>
-								<input type="text" name="email" class="form-control">
-							</div>
-						</div>
-						<div class="form-group row">
-							{{-- 選擇隱藏爛位 --}}
-							<label class='col-md-2 col-form-label text-md-right'>{{ __('Permission') }}</label>
-							<div class='col-md-3'>
-								<select class="form-control" name="permission">
-									<option value="">{{ __('All') }}</option>
-									@foreach (App\Enum::permission as $key => $value)
-										<option value="{{ $key }}">{{ $value }}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-					</div>
+                        <div class="form-row">
+                            <div class='form-group col-md-3'>
+                                <label for="name">{{ trans('action.user.name') }}</label>
+                                <input type="text" class="form-control" name="name" id="name">
+                            </div>
+                            <div class='form-group col-md-3'>
+                                <label for="email">{{ trans('action.user.email') }}</label>
+                                <input type="text" class="form-control" name="email" id="email">
+                            </div>
+                            {{-- 選擇隱藏爛位 --}}
+                            <div class='form-group col-md-3'>
+                                <label for="permission">{{ trans('action.user.permission') }}</label>
+                                <select class="form-control" name="permission" id="permission">
+                                    <option value="">{{ trans('All') }}</option>
+                                    @foreach (App\Enum::permission as $key => $value)
+                                        <option value="{{ $key }}">{{ trans($value) }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class='form-group col-md-3'>
+                                <label for="student_id">{{ trans('action.user.student_id') }}</label>
+                                <input type="text" class="form-control" name="student_id" id="student_id">
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-secondary">
+                                <i class="fas fa-search"></i> {{ trans('action.search') }}
+                            </button>
+                        </div>
+                    </div>
 					</form>
 					<div class="table-responsive">
 						<table id="data" class="table table-hover table-bordered text-center">
 		                	<thead>
 		                		<tr class="table-info active">
-		                			<th class="text-nowrap text-center">{{ __('Name') }}</th>
-		                			<th class="text-nowrap text-center">{{ __('E-Mail Address') }}</th>
-		                			<th class="text-nowrap text-center" style="display:none">{{ __('Permission') }}</th>
-		                			<th class="text-nowrap text-center">{{ __('Permission') }}</th>
-		                			<th class="text-nowrap text-center">{{ __('Action') }}</th>
+		                			<th class="text-nowrap text-center">{{ trans('action.user.name') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.user.student_id') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.user.email') }}</th>
+                                    <th class="text-nowrap text-center" style="display:none"></th>
+                                    <th class="text-nowrap text-center">{{ trans('action.user.permission') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.action') }}</th>
 		                		</tr>
 		                	</thead>
 		                	<tbody>
 								@foreach ($users_search as $user)
 									<tr>
 										<td>{{ $user->name }}</td>
-										<td>{{ $user->email }}</td>
-										<td style="display:none">{{ $user->permission }}</td>
-										<td>{{App\Enum::permission[$user->permission]}}</td>
-										<td>
-											<form action="{{ route('member.edit',$user->id) }}" method="GET">
-											@csrf
-											{{ App\Button::edit($user->id) }}
-											</form>
-											<form action="{{ route('member.destroy',$user->id) }}" method="POST">
-											@method('DELETE')
-											@csrf
-											{{ App\Button::deleting($user->id) }}
-											</form>
-										</td>
+                                        <td>{{ $user->student_id }}</td>
+                                        <td>{{ $user->email }}</td>
+                                        <td style="display:none">{{ $user->permission }}</td>
+                                        <td>{{ trans(App\Enum::permission[$user->permission]) }}</td>
+                                        <td>
+                                            <form class="d-inline" action="{{ route('member.edit',$user->id) }}" method="GET">
+                                                @csrf
+                                                {{ App\Button::edit($user->id) }}
+                                            </form>
+                                            <form class="d-inline" action="{{ route('member.destroy',$user->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                {{ App\Button::deleting($user->id) }}
+                                            </form>
+                                        </td>
 									</tr>
 		                		@endforeach
 		                	</tbody>

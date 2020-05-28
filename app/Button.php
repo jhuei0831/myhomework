@@ -67,7 +67,7 @@ class Button extends Model
 			$current_url = $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 			$target_url = ($url) ? $url: URL::previous();
 
-			echo "<a class='btn btn-sm btn-default' href='{$target_url}'>";
+			echo "<a class='btn btn-sm btn-warning' href='{$target_url}'>";
 			echo 	"<i class='fas fa-arrow-left'></i> ".trans('action.previous');
 			echo "</a>";
 		}

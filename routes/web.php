@@ -24,7 +24,7 @@ Route::get('/manage', function () {return view('manage.index');})->middleware('a
 Route::get('/home', 'HomeController@index')->name('home');
 
 //中介層:登入/非IE瀏覽器/信箱驗證/管理員
-Route::middleware('auth','browser','admin','verified')->group(function() {
+Route::middleware('auth')->group(function() {
     //排序
     Route::post('info-sortable','InfoController@sort')->name('info.sort');
     Route::get('/manage/info/sort', function () {return view('manage.info.sort');});

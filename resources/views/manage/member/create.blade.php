@@ -71,7 +71,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <input type="submit" class="btn btn-primary" value="{{ trans('action.create') }}">
+                        <input type="submit" class="btn btn-raised btn-primary" value="{{ trans('action.create') }}">
                     </div>
                 </form>
             </div>

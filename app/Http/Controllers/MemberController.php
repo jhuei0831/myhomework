@@ -19,7 +19,7 @@ class MemberController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
 
         $all_users = DB::table('users')->paginate();
@@ -29,11 +29,15 @@ class MemberController extends Controller
     public function search(Request $request)
     {
         $name = $request->name;
+        $student_id = $request->student_id;
         $email = $request->email;
         $permission = $request->permission;
 
         $users_search = User::when($name, function ($q) use ($name) {
             return $q->where('name', 'like', '%' . $name . '%');
+        })
+        ->when($student_id, function ($q) use ($student_id) {
+            return $q->where('student_id', 'like', '%' . $student_id . '%');
         })
         ->when($email, function ($q) use ($email) {
             return $q->where('email', 'like', '%' . $email . '%');
@@ -55,7 +59,7 @@ class MemberController extends Controller
     public function create()
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny !');
         }
         return view('manage.member.create');
     }
@@ -69,7 +73,7 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny !');
         }
         $error = 0;
         $user = new User;
@@ -96,14 +100,14 @@ class MemberController extends Controller
 
         if ($error == 0) {
             // 寫入log
-            Log::write_log('users',$request->all());
+            Log::write_log('users',$user);
             $user->save();
         }
         else{
-            return back()->withInput()->with('warning', '請確認輸入 !');
+            return back()->withInput()->with('warning', 'action.input_confirm !');
         }
 
-        return back()->with('success','會員新增成功 !');
+        return back()->with('success','action.create_success');
     }
 
     /**
@@ -115,7 +119,7 @@ class MemberController extends Controller
     public function show()
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny !');
         }
 
         $users = DB::table('users')->paginate(10);
@@ -131,7 +135,7 @@ class MemberController extends Controller
     public function edit($id)
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny !');
         }
         $user = User::where('id',$id)->first();
         return view('manage.member.edit',compact('user'));
@@ -147,7 +151,7 @@ class MemberController extends Controller
     public function update(Request $request, $id)
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny !');
         }
         $error = 0;
         $user = User::where('id',$id)->first();
@@ -156,7 +160,6 @@ class MemberController extends Controller
         if ($request->filled('password')) {
                 $data = $this->validate($request, [
                 'name' => ['required', 'string', 'max:255'],
-                'student_id' => ['required', 'string', 'max:255', 'unique:users'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'password' => ['required', 'string', 'min:1', 'confirmed'],
                 'permission' => ['required', 'integer', 'max:5', 'min:0'],
@@ -180,14 +183,13 @@ class MemberController extends Controller
                 $user->save();
             }
             else{
-                return back()->withInput()->with('warning', '請確認輸入 !');
+                return back()->withInput()->with('warning', 'action.input_confirm !');
             }
         }
         else{
 
             $data = $this->validate($request, [
                 'name' => ['required', 'string', 'max:255'],
-                'student_id' => ['required', 'string', 'max:255', 'unique:users'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'permission' => ['required', 'integer', 'max:5', 'min:0'],
             ]);
@@ -208,11 +210,11 @@ class MemberController extends Controller
                 $user->save();
             }
             else{
-                return back()->withInput()->with('warning', '請確認輸入 !');
+                return back()->withInput()->with('warning', 'action.input_confirm');
             }
         }
 
-        return back()->with('success', '會員更新成功 !');
+        return back()->with('success', 'action.update_success');
     }
 
     /**
@@ -224,12 +226,12 @@ class MemberController extends Controller
     public function destroy($id)
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny !');
         }
         // 寫入log
         Log::write_log('users',User::where('id',$id)->first());
 
         User::destroy($id);
-        return back()->with('success', '會員刪除成功 !');
+        return back()->with('success', 'action.delete_success');
     }
 }

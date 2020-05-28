@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class LogController extends Controller
@@ -14,12 +15,20 @@ class LogController extends Controller
      */
     public function index()
     {
+        if (Auth::check() && Auth::user()->permission < '5') {
+            return back()->with('warning', 'action.permission.deny');
+        }
+
         $logs = Log::orderby('created_at','desc')->paginate();
         return view('manage.log.index',compact('logs'));
     }
 
     public function search(Request $request)
     {
+        if (Auth::check() && Auth::user()->permission < '5') {
+            return back()->with('warning', 'action.permission.deny');
+        }
+
         $user = $request->user;
         $ip = $request->ip;
         $browser = $request->browser;
@@ -71,7 +80,7 @@ class LogController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -82,6 +91,10 @@ class LogController extends Controller
      */
     public function show($id)
     {
+        if (Auth::check() && Auth::user()->permission < '5') {
+            return back()->with('warning', 'action.permission.deny');
+        }
+
         $log = Log::where('id',$id)->first();
         return view('manage.log.detail',compact('log'));
     }
