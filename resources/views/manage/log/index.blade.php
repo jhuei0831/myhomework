@@ -30,7 +30,7 @@
                             <div class='form-group col-md-3'>
                                 <label>{{ trans('action.log.browser') }}</label>
                                 <select class="form-control" name="browser">
-                                    <option value="">{{ trans('All') }}</option>
+                                    <option value="">{{ trans('action.all') }}</option>
                                     @foreach (App\Enum::browser as $key => $value)
                                         <option value="{{ $value }}">{{ $value }}</option>
                                     @endforeach
@@ -40,7 +40,7 @@
                             <div class='form-group col-md-3'>
                                 <label>{{ trans('action.action') }}</label>
                                 <select class="form-control" name="action">
-                                    <option value="">{{ trans('All') }}</option>
+                                    <option value="">{{ trans('action.all') }}</option>
                                     @foreach (App\Enum::action as $key => $value)
                                         <option value="{{ $value }}">{{ trans($value) }}</option>
                                     @endforeach
@@ -92,7 +92,7 @@
 										<td>{{ $log->user }}</td>
 										<td>{{ $log->ip }}</td>
 										<td>{{ $log->browser }}</td>
-										<td>{{ $log->action }}</td>
+										<td>{{ trans($log->action) }}</td>
 										<td>{{ $log->table }}</td>
 										<td>{{ $log->created_at }}</td>
 										<td>

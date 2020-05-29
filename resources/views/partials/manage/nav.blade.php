@@ -11,20 +11,17 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('notice.index') }}">{{ trans('Notice').trans('Manage') }}</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('info.index') }}">{{ trans('Information').trans('Manage') }}</a>
+                    <a class="nav-link" href="{{ route('info.index') }}">{{ trans('action.info.info').trans('action.manage') }}</a>
                 </li>
                 @if (Auth::check() && Auth::user()->permission > '4')
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('member.index') }}">{{ trans('Member').trans('Manage') }}</a>
+                    <a class="nav-link" href="{{ route('member.index') }}">{{ trans('action.user.title').trans('action.manage') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('config.index') }}">{{ trans('Config') }}</a>
+                    <a class="nav-link" href="{{ route('config.index') }}">{{ trans('action.config.config') }}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('log.index') }}">{{ trans('Log') }}</a>
+                    <a class="nav-link" href="{{ route('log.index') }}">{{ trans('action.log.title') }}</a>
                 </li>
                 @endif
             </ul>

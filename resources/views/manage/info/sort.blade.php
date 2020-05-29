@@ -1,11 +1,11 @@
 @extends('layouts.manage.app')
-@section('title', __('Information').__('Sort'))
+@section('title', trans('action.info.info').trans('action.sort'))
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{__('Information').__('Sort')}}</div>
+                <div class="card-header">{{trans('action.info.info').trans('action.sort')}}</div>
 
                 <div class="card-body">
 					<ul class="list-unstyled">
@@ -18,9 +18,9 @@
                 	<table id="table" class="table table-hover table-bordered text-center">
 	                	<thead>
 	                		<tr class="table-info active">
-	                			<th class="text-nowrap text-center">{{__('Information').__('Title')}}</th>
-	                			<th class="text-nowrap text-center">{{ __('Created_at') }}</th>
-	                			<th class="text-nowrap text-center">{{ __('Sort') }}</th>
+	                			<th class="text-nowrap text-center">{{ trans('action.info.title') }}</th>
+	                			<th class="text-nowrap text-center">{{ trans('action.info.created_at') }}</th>
+	                			<th class="text-nowrap text-center">{{ trans('action.sort') }}</th>
 	                		</tr>
 	                	</thead>
 	                	<tbody id="tablecontents">
@@ -35,7 +35,7 @@
                     </table>
                 </div>
                 <div class="card-footer text-center">
-                	<h5><button class="btn btn-success btn-sm" onclick="window.location.reload()">{{ __('Refresh') }}</button></h5>
+                	<h5><button class="btn btn-raised btn-success btn-sm" onclick="window.location.reload()">{{ trans('Refresh') }}</button></h5>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
 @parent
 <script type="text/javascript">
     $(function () {
-        // $("#table").DataTable();
+        $("#table").DataTable();
 
         $("#tablecontents").sortable({
             items: "tr",

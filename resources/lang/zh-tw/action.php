@@ -14,22 +14,42 @@ return [
     'delete_confirm1' => '確認刪除?',
     'delete_confirm2' => '若刪除資料將無法復原!',
     'delete_success' => '刪除成功!',
+    'delete_background' => '背景刪除',
     'detail' => '詳細資料',
     'edit' => '修改',
     'filter' => '篩選',
     'input_confirm' => '請確認輸入!',
     'keep' => '資料已保留',
     'manage' => '管理',
+    'no' => '否',
     'previous' => '上一頁',
     'reset' => '重置',
     'sort' => '排序',
+    'submit' => '送出',
     'search' => '搜尋',
     'update_success' => '更新成功!',
+    'yes' => '是',
 
     'news' => '最新消息',
 
+    'config' => [
+        'config' => '網站設定',
+    ],
+
+    'info' => [
+        'info' => '消息',
+        'title' => '標題',
+        'content' => '內容',
+        'editor' => '編輯者',
+        'is_open' => '是否開放',
+        'is_sticky' => '是否置頂',
+        'created_at' => '建立時間',
+        'updated_at' => '更新時間',
+        'notice' => '只有置頂消息可以進行手動排序，其他消息以更新時間自動排序。',
+    ],
+
     'log' => [
-        'title' => 'Log ',
+        'title' => 'Log',
         'ip' => 'IP',
         'browser' => '瀏覽器',
         'table' => '資料表',
@@ -38,6 +58,10 @@ return [
         'data' => '數值',
         'user' => '使用者',
         'os' => '作業系統',
+    ],
+
+    'notice' => [
+        'notice' => '通知',
     ],
 
     'permission' => [
@@ -57,7 +81,7 @@ return [
         'permission' => '權限',
         'password' => '密碼',
         'student_id' => '學號',
-        'title' => '使用者 '
+        'title' => '使用者'
     ],
 
 ];

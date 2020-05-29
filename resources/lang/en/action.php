@@ -21,13 +21,32 @@ return [
     'input_confirm' => 'Please confirm input !',
     'keep' => 'Data has been retained',
     'manage' => 'Manage',
+    'no' => 'No',
     'previous' => 'Previous',
     'reset' => 'Reset',
     'sort' => 'Sort',
+    'submit' => 'Submit',
     'search' => 'Search',
     'update_success' => 'Successfully Updated !',
+    'yes' => 'Yes',
 
     'news' => 'News',
+
+    'config' => [
+        'config' => 'Config',
+    ],
+
+    'info' => [
+        'info' => 'Information ',
+        'title' => 'Title',
+        'content' => 'Content',
+        'editor' => 'Editor',
+        'is_open' => 'Open',
+        'is_sticky' => 'Sticky',
+        'created_at' => 'Created Time',
+        'updated_at' => 'Updated Time',
+        'notice' => 'Only the top messages can be sorted manually, and other messages are automatically sorted at the update time.',
+    ],
 
     'log' => [
         'title' => 'Log ',
@@ -39,6 +58,10 @@ return [
         'data' => 'Data',
         'user' => 'User',
         'os' => 'Operate System',
+    ],
+
+    'notice' => [
+        'notice' => 'Notice',
     ],
 
     'permission' => [

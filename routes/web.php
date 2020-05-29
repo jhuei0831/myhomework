@@ -43,3 +43,11 @@ Route::prefix('manage')->middleware('auth')->group(function(){
     Route::resource('log', 'LogController');
     Route::resource('info', 'InfoController');
 });
+
+//在各視圖中可直接使用以下參數
+View::composer(['*'], function ($view) {
+    $infos = App\Info::where('is_sticky',0)->where('is_open',1)->orderby('updated_at')->paginate(10);
+    $info_stickys = App\Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
+    $view->with('infos',$infos);
+    $view->with('info_stickys',$info_stickys);
+});

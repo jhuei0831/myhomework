@@ -29,7 +29,7 @@ class InfoController extends Controller
     public function create()
     {
         if (Auth::check() && Auth::user()->permission < '2') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         return view('manage.info.create');
     }
@@ -43,7 +43,7 @@ class InfoController extends Controller
     public function store(Request $request)
     {
         if (Auth::check() && Auth::user()->permission < '2') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         $error = 0;
         $info = new Info;
@@ -51,8 +51,8 @@ class InfoController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
-            'is_open' => ['required'],          
-            'is_sticky' => ['required'],          
+            'is_open' => ['required'],
+            'is_sticky' => ['required'],
         ]);
 
         foreach ($request->except('_token', '_method') as $key => $value) {
@@ -73,12 +73,12 @@ class InfoController extends Controller
             $info->save();
         }
         else{
-            return back()->withInput()->with('warning', '請確認輸入 !');
+            return back()->withInput()->with('warning', 'action.input_confirm');
         }
         // 寫入log
         Log::write_log('infos',$request->all());
 
-        return back()->with('success', '消息新增成功 !');
+        return back()->with('success', 'action.create_success');
     }
 
     /**
@@ -101,7 +101,7 @@ class InfoController extends Controller
     public function edit($id)
     {
         if (Auth::check() && Auth::user()->permission < '3') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         $info = Info::where('id',$id)->first();
         return view('manage.info.edit',compact('info'));
@@ -117,7 +117,7 @@ class InfoController extends Controller
     public function update(Request $request, $id)
     {
         if (Auth::check() && Auth::user()->permission < '3') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         $error = 0;
         $info = Info::where('id',$id)->first();
@@ -125,8 +125,8 @@ class InfoController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required'],
-            'is_open' => ['required'],          
-            'is_sticky' => ['required'],          
+            'is_open' => ['required'],
+            'is_sticky' => ['required'],
         ]);
 
         foreach ($request->except('_token', '_method') as $key => $value) {
@@ -147,12 +147,12 @@ class InfoController extends Controller
             $info->save();
         }
         else{
-            return back()->withInput()->with('warning', '請確認輸入 !');
+            return back()->withInput()->with('warning', 'action.input_confirm');
         }
         // 寫入log
         Log::write_log('infos',$request->all());
 
-        return back()->with('success', '消息修改成功 !');
+        return back()->with('success', 'action.update_success');
     }
 
     /**
@@ -164,12 +164,12 @@ class InfoController extends Controller
     public function destroy($id)
     {
         if (Auth::check() && Auth::user()->permission < '4') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         // 寫入log
         Log::write_log('infos',Info::where('id', $id)->first());
         Info::destroy($id);
-        return back()->with('success','刪除消息成功 !');
+        return back()->with('success','action.delete_success');
     }
     /**
      * [info_detail 顯示消息內容]
@@ -186,9 +186,9 @@ class InfoController extends Controller
     public function sort(Request $request)
     {
         if (Auth::check() && Auth::user()->permission < '3') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
-        
+
         $info_stickys = Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
 
         foreach ($info_stickys as $info) {
@@ -199,8 +199,8 @@ class InfoController extends Controller
             }
         }
         $sort = DB::table('infos')->where('is_sticky',1)->where('is_open',1)->select('title','sort')->orderby('sort')->get();
-        Log::write_log('infos',$sort,'排序');
-        
+        Log::write_log('infos',$sort,'action.sort');
+
         return response('Update Successfully.', 200);
     }
 }
