@@ -34,6 +34,18 @@ return [
 
     'config' => [
         'config' => '網站設定',
+        'notice1' => '此設定只針對前台。',
+        'notice2' => '背景圖案會蓋過背景顏色，若要顯示背景顏色(漸層)則要先刪除背景圖。',
+        'app_name' => '網站名稱',
+        'font_family' => '字體',
+        'font_size' => '字體大小',
+        'font_weight' => '字體粗細',
+        'background' => '背景圖片',
+        'background_color' => '背景顏色',
+        'navbar_background_color' => '導覽列背景顏色',
+        'navbar_text_color' => '導覽列文字顏色',
+        'navbar_text_size' => '導覽列文字大小',
+        'is_open' => '是否開放',
     ],
 
     'info' => [
@@ -45,7 +57,9 @@ return [
         'is_sticky' => '是否置頂',
         'created_at' => '建立時間',
         'updated_at' => '更新時間',
-        'notice' => '只有置頂消息可以進行手動排序，其他消息以更新時間自動排序。',
+        'notice1' => '只有置頂消息可以進行手動排序，其他消息以更新時間自動排序。',
+        'notice2' => '請直接拖曳目標列進行排序。',
+        'notice3' => '調整完請點重新整理進行確認。',
     ],
 
     'log' => [
@@ -58,10 +72,6 @@ return [
         'data' => '數值',
         'user' => '使用者',
         'os' => '作業系統',
-    ],
-
-    'notice' => [
-        'notice' => '通知',
     ],
 
     'permission' => [

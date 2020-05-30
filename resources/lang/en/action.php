@@ -34,6 +34,18 @@ return [
 
     'config' => [
         'config' => 'Config',
+        'notice1' => 'This setting is only for the frontstage.',
+        'notice2' => 'The background pattern will overwrite the background color. To display the background color (gradient), the background image must be deleted first.',
+        'app_name' => 'App Name',
+        'font_family' => 'Font Family',
+        'font_size' => 'Font Size',
+        'font_weight' => 'Font Weight',
+        'background' => 'Background',
+        'background_color' => 'Background Color',
+        'navbar_background_color' => 'Navbar Background Color',
+        'navbar_text_color' => 'Navbar Text Color',
+        'navbar_text_size' => 'Navbar Text Size',
+        'is_open' => 'Open',
     ],
 
     'info' => [
@@ -45,7 +57,9 @@ return [
         'is_sticky' => 'Sticky',
         'created_at' => 'Created Time',
         'updated_at' => 'Updated Time',
-        'notice' => 'Only the top messages can be sorted manually, and other messages are automatically sorted at the update time.',
+        'notice1' => 'Only the top messages can be sorted manually, and other messages are automatically sorted at the update time.',
+        'notice2' => 'Please drag the target row directly to sort.',
+        'notice3' => 'After adjustment, please click refresh to confirm.',
     ],
 
     'log' => [
@@ -58,10 +72,6 @@ return [
         'data' => 'Data',
         'user' => 'User',
         'os' => 'Operate System',
-    ],
-
-    'notice' => [
-        'notice' => 'Notice',
     ],
 
     'permission' => [

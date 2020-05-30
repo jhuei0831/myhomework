@@ -1,32 +1,32 @@
 @extends('layouts.manage.app')
-@section('title',__('Config'))
+@section('title',trans('action.config.config'))
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ __('Config') }}</div>
+                <div class="card-header">{{ trans('action.config.config') }}</div>
 
                 <div class="card-body">
                     <div class="alert alert-warning" role="alert">
-                        1. 此設定只針對前台。<br>
-                        2. 背景圖案會蓋過背景顏色，若要顯示背景顏色(漸層)則要先刪除背景圖。
+                        1. {{ trans('action.config.notice1') }}<br>
+                        2. {{ trans('action.config.notice2') }}
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered text-center">
                             <thead>
                                 <tr class="table-info active">
-                                    <th class="text-nowrap text-center">{{ __('App name') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Font family') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Font size') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Font weight') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Background') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Background color') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Navbar background color') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Navbar text color') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Navbar text size') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Is_open') }}</th>
-                                    <th class="text-nowrap text-center">{{ __('Action') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.app_name') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.font_family') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.font_size') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.font_weight') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.background') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.background_color') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.navbar_background_color') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.navbar_text_color') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.navbar_text_size') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.is_open') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.action') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,7 +55,7 @@
                                         {{ App\Button::edit($config->id) }}
                                         </form>
                                         @isset ($config->background)
-                                            {{ App\Button::to('delete_background',__('Delete').__('Background'),$config->id,'btn-danger','trash-alt',true) }}
+                                            {{ App\Button::to('delete_background',trans('Delete').trans('Background'),$config->id,'btn-danger','trash-alt',true) }}
                                         @endisset
                                     </td>
                                 </tr>

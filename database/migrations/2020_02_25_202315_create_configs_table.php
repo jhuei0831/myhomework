@@ -33,7 +33,7 @@ class CreateConfigsTable extends Migration
             'app_name' => 'Website',
             'font_family' => 'Helvetica, Arial',
             'font_size' => 'large',
-            'font_weight' => 'bold',
+            'font_weight' => '200',
             'background' => 'null',
             'background_color' => 'null',
             'navbar_bcolor' => '000',

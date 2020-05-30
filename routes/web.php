@@ -46,8 +46,11 @@ Route::prefix('manage')->middleware('auth')->group(function(){
 
 //在各視圖中可直接使用以下參數
 View::composer(['*'], function ($view) {
+    $config = DB::table('configs')->where('id','1')->first();
+    Config::set('app.name', $config->app_name);
     $infos = App\Info::where('is_sticky',0)->where('is_open',1)->orderby('updated_at')->paginate(10);
     $info_stickys = App\Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
+    $view->with('config',$config);
     $view->with('infos',$infos);
     $view->with('info_stickys',$info_stickys);
 });

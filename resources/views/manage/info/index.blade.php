@@ -14,7 +14,7 @@
 						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('action.filter') }}</a></li>
 					</ul>
 					<div class="alert alert-warning" role="alert">
-                        {{ trans('action.info.notice') }}
+                        {{ trans('action.info.notice1') }}
                     </div>
                     {{-- 篩選器設定 --}}
                     <div class="collapse" id="search">
