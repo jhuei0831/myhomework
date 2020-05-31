@@ -22,6 +22,7 @@ Auth::routes();
 Route::get('/manage', function () {return view('manage.index');})->middleware('auth')->name('manage');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/detail/{id}', 'InfoController@infodetail')->name('detail');
 
 //中介層:登入/非IE瀏覽器/信箱驗證/管理員
 Route::middleware('auth')->group(function() {

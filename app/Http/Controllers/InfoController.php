@@ -179,7 +179,7 @@ class InfoController extends Controller
     public function infodetail($id)
     {
         $info_detail = Info::where('id',$id)->first();
-        return view('info.detail',compact('info_detail'));
+        return view('detail',compact('info_detail'));
     }
 
     //拖曳排序

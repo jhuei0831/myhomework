@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans('action.log.title').trans('action.manage') }}</div>
+                <div class="card-header">
+                    <h4><i class="fas fa-clipboard-list"></i> {{ trans('action.log.title').' '.trans('action.manage') }}</h4>
+                </div>
                 <div class="card-body">
                 	<form action="{{ route('log.search') }}" method="post">
 					@csrf
@@ -26,6 +28,16 @@
                                 <label>{{ trans('action.log.ip') }}</label>
                                 <input type="text" class="form-control" name="ip">
                             </div>
+
+                            <div class="form-group col-md-6">
+                                <label>{{ trans('action.log.create_at') }}</label>
+                                <div class="input-daterange input-group" >
+                                    <input id="datepicker1" type="text" class="form-control" name="start" autocomplete="off" />
+                                    <span class="input-group-addon">-</span>
+                                    <input id="datepicker2" type="text" class="form-control" name="end" autocomplete="off" />
+                                </div>
+                            </div>
+
                             {{-- 選擇隱藏爛位 --}}
                             <div class='form-group col-md-3'>
                                 <label>{{ trans('action.log.browser') }}</label>
@@ -47,7 +59,6 @@
                                 </select>
                             </div>
 
-
                             <div class='form-group col-md-3'>
                                 <label>{{ trans('action.log.table') }}</label>
                                 <select class="form-control" name="table">
@@ -59,14 +70,6 @@
                             </div>
 
 
-                            <div class="form-group col-md-6">
-                                <label>{{ trans('action.log.create_at') }}</label>
-                                <div class="input-daterange input-group" >
-                                    <input id="datepicker1" type="text" class="form-control" name="start" autocomplete="off" />
-                                    <span class="input-group-addon">-</span>
-                                    <input id="datepicker2" type="text" class="form-control" name="end" autocomplete="off" />
-                                </div>
-                            </div>
                         </div>
                         <button type="submit" class="btn btn-sm btn-secondary">
                             <i class="fas fa-search"></i> {{ trans('action.search') }}

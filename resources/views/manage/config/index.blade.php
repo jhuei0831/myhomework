@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans('action.config.config') }}</div>
+                <div class="card-header">
+                    <h4><i class="fas fa-cog"></i> {{ trans('action.config.config') }}</h4>
+                </div>
 
                 <div class="card-body">
                     <div class="alert alert-warning" role="alert">
@@ -37,7 +39,7 @@
                                     <td style="font-weight: {{ $config->font_weight }}">{{App\Enum::config['font_weight'][$config->font_weight]}}</td>
                                     <td>
                                         @if($config->background)
-                                        <a target='_blank' href="{{ $config->background }}"><i class="far fa-images"></i></a>
+                                        <a target='_blank' href="{{ asset('storage/uploads/images/'.$config->background) }}"><i class="far fa-images"></i></a>
                                         @else
                                         <a class="btn btn-primary disabled" href="#"><i class="fas fa-times-circle"></i> 尚無背景</a>
                                         @endif
@@ -50,13 +52,27 @@
                                         <font color="{{App\Enum::is_open['color'][$config->is_open]}}"><i class="fas fa-{{App\Enum::is_open['label'][$config->is_open]}}"></i></font>
                                         </td>
                                     <td>
-                                        <form action="{{ route('config.edit',$config->id) }}" method="GET">
+                                        <div class="dropdown">
+                                            <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="ex1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="material-icons">more_vert</i>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="ex1">
+                                                <form class="d-inline" action="{{ route('config.edit',$config->id) }}" method="GET">
+                                                    @csrf
+                                                    {{ App\Button::edit($config->id) }}
+                                                </form>
+                                                @isset ($config->background)
+                                                    {{ App\Button::to(true,'delete_background',trans('action.delete').trans('action.config.background'),$config->id,'btn-danger dropdown-item','trash-alt',true) }}
+                                                @endisset
+                                            </div>
+                                        </div>
+                                        {{-- <form class="d-inline" action="{{ route('config.edit',$config->id) }}" method="GET">
                                         @csrf
                                         {{ App\Button::edit($config->id) }}
                                         </form>
                                         @isset ($config->background)
-                                            {{ App\Button::to('delete_background',trans('Delete').trans('Background'),$config->id,'btn-danger','trash-alt',true) }}
-                                        @endisset
+                                            {{ App\Button::to(true,'delete_background',trans('action.delete').trans('action.config.background'),$config->id,'btn-danger','trash-alt',true) }}
+                                        @endisset --}}
                                     </td>
                                 </tr>
                             </tbody>

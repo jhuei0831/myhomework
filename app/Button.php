@@ -10,22 +10,22 @@ class Button extends Model
 		{
 			$url = URL::full();
 			echo "<button type=\"submit\" class='btn btn-sm btn-secondary'>";
-			echo 	"<i class='fas fa-info-circle'></i> ".trans('action.detail');
+			echo 	"<i class='fas fa-info-circle'></i>&nbsp;".trans('action.detail');
 			echo "</a>";
 		}
 
 		public static function Deleting($id)
 		{
 			// $url = URL::full();
-			echo "<button type='submit' class='btn btn-sm btn-danger btn-delete'>";
-			echo 	"<i class='fas fa-trash-alt'></i> ".trans('action.delete');
+			echo "<button type='submit' class='btn btn-sm btn-danger btn-delete dropdown-item'>";
+			echo 	"<i class='fas fa-trash-alt'></i>&nbsp;".trans('action.delete');
 			echo "</button>";
 		}
 
 		public static function Edit($id)
 		{
-			echo "<button type=\"submit\" class='btn btn-sm btn-success' formtarget='_blank'>";
-			echo "<i class='fas fa-pencil-alt'></i> " . trans('action.edit');
+			echo "<button type=\"submit\" class='btn btn-sm btn-success dropdown-item' formtarget='_blank'>";
+			echo "<i class='fas fa-pencil-alt'></i>&nbsp;" . trans('action.edit');
 			echo "</button>";
 		}
 
@@ -33,7 +33,7 @@ class Button extends Model
 		{
 			$url = URL::full();
 			echo "<a class='btn btn-sm btn-primary' href='{$url}/create'>";
-			echo 	"<i class='fas fa-plus'></i> ".trans('action.create');
+			echo 	"<i class='fas fa-plus'></i>&nbsp;".trans('action.create');
 			echo "</a>";
 		}
 
@@ -41,7 +41,7 @@ class Button extends Model
 		{
 			echo "<p class='text-right'>";
 			echo	"<a class='btn btn-sm btn-reset btn-danger' href='reset.php'>";
-			echo		"<i class='fas fa-undo-alt'></i> ".trans('action.reset');
+			echo		"<i class='fas fa-undo-alt'></i>&nbsp;".trans('action.reset');
 			echo 	"</a>";
 			echo "</p>";
 		}
@@ -58,7 +58,7 @@ class Button extends Model
 			else{
 				echo "<a class='btn btn-sm {$class}' href='{$to}/{$query}' {$confirm}>";
 			}
-			echo 	"<i class='fas fa-{$fas}'></i> {$txt}";
+			echo 	"<i class='fas fa-{$fas}'></i>&nbsp;{$txt}";
 			echo "</a>";
 		}
 

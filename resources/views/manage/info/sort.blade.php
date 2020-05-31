@@ -35,7 +35,7 @@
                     </table>
                 </div>
                 <div class="card-footer text-center">
-                	<h5><button class="btn btn-raised btn-success btn-sm" onclick="window.location.reload()">{{ trans('Refresh') }}</button></h5>
+                	<h5><button class="btn btn-raised btn-success btn-sm" onclick="window.location.reload()">{{ trans('action.refresh') }}</button></h5>
                 </div>
             </div>
         </div>

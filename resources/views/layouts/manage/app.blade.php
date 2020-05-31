@@ -24,7 +24,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background-image: url('{{ asset('background.jpg')}}')">
+<body style="background-image: url('{{ asset('background.jpg')}}');font-family:Microsoft JhengHei;">
     <div id="app">
         @include('partials.manage.nav')
         <main class="py-4">

@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans('action.info.info').trans('action.manage') }}</div>
+                <div class="card-header">
+                    <h4><i class="fas fa-info-circle"></i> {{ trans('action.info.info').trans('action.manage') }}</h4>
+                </div>
 
                 <div class="card-body">
 					<ul class="list-inline">
@@ -79,15 +81,22 @@
 										<td>{{ $info->created_at }}</td>
 										<td>{{ $info->updated_at }}</td>
 										<td>
-											<form class="d-inline" action="{{ route('info.edit',$info->id) }}" method="GET">
-											@csrf
-											{{ App\Button::edit($info->id) }}
-											</form>
-											<form class="d-inline" action="{{ route('info.destroy',$info->id) }}" method="POST">
-											@method('DELETE')
-											@csrf
-											{{ App\Button::deleting($info->id) }}
-											</form>
+                                            <div class="dropdown">
+                                                <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="ex1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="ex1">
+                                                    <form class="d-inline" action="{{ route('info.edit',$info->id) }}" method="GET">
+                                                    @csrf
+                                                    {{ App\Button::edit($info->id) }}
+                                                    </form>
+                                                    <form class="d-inline" action="{{ route('info.destroy',$info->id) }}" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    {{ App\Button::deleting($info->id) }}
+                                                    </form>
+                                                </div>
+                                            </div>
 										</td>
 									</tr>
 		                		@endforeach
