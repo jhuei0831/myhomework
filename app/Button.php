@@ -37,6 +37,14 @@ class Button extends Model
 			echo "</a>";
 		}
 
+        public static function Import()
+        {
+            $url = URL::full();
+            echo "<a class='btn btn-sm btn-primary' href='{$url}/import'>";
+            echo    "<i class='fas fa-plus'></i>&nbsp;".trans('action.import');
+            echo "</a>";
+        }
+
 		public static function Reset()
 		{
 			echo "<p class='text-right'>";

@@ -21,6 +21,7 @@ return [
     'filter' => 'Filter',
     'frontstage' => 'Frontstage',
     'input_confirm' => 'Please confirm input !',
+    'import' => 'Import',
     'keep' => 'Data has been retained',
     'manage' => 'Manage',
     'no' => 'No',

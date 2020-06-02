@@ -34,6 +34,9 @@ Route::middleware('auth')->group(function() {
     //搜尋
     Route::any('manage/log/search', 'LogController@search')->name('log.search');
     Route::any('manage/member/search', 'MemberController@search')->name('member.search');
+    //上傳
+    Route::any('manage/member/import', function () {return view('manage.member.import');});
+    Route::any('manage/member/upload', 'ImportController@import')->name('member.import');
 });
 
 // Manage

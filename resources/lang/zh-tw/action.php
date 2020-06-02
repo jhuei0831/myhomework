@@ -21,6 +21,7 @@ return [
     'filter' => '篩選',
     'frontstage' => '前台頁面',
     'input_confirm' => '請確認輸入!',
+    'import' => '上傳',
     'keep' => '資料已保留',
     'manage' => '管理',
     'no' => '否',
