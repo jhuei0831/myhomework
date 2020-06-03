@@ -46,6 +46,8 @@ Route::prefix('manage')->middleware('auth')->group(function(){
     Route::resource('notice', 'NoticeController');
     Route::resource('log', 'LogController');
     Route::resource('info', 'InfoController');
+    Route::resource('course', 'CourseController');
+    Route::resource('student', 'StudentController');
 });
 
 //在各視圖中可直接使用以下參數

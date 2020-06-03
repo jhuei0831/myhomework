@@ -11,6 +11,12 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('course.index') }}">{{ trans('action.course.course').trans('action.manage') }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('student.index') }}">{{ trans('action.student.student').trans('action.manage') }}</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('info.index') }}">{{ trans('action.info.info').trans('action.manage') }}</a>
                 </li>
                 @if (Auth::check() && Auth::user()->permission > '4')

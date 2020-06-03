@@ -3,16 +3,19 @@
 namespace App;
 
 use App\User;
+use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Validators\Failure;
 use Maatwebsite\Excel\Concerns\Importable;
-use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
 
-class Import implements ToModel, WithValidation
+class Import implements ToModel, WithValidation, SkipsOnFailure
 {
-    use Importable;
+    use Importable, SkipsFailures;
 
     public function model(array $row)
     {

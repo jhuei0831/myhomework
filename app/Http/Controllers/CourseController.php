@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Info;
-use App\log;
+use App\Course;
+use App\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class InfoController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +17,8 @@ class InfoController extends Controller
      */
     public function index()
     {
-        $all_infos = Info::all();
-        return view('manage.info.index',compact('all_infos'));
+        $all_courses = Course::paginate();
+        return view('manage.course.index',compact('all_courses'));
     }
 
     /**
@@ -31,7 +31,7 @@ class InfoController extends Controller
         if (Auth::check() && Auth::user()->permission < '2') {
             return back()->with('warning', 'action.permission.deny');
         }
-        return view('manage.info.create');
+        return view('manage.course.create');
     }
 
     /**
@@ -46,31 +46,25 @@ class InfoController extends Controller
             return back()->with('warning', 'action.permission.deny');
         }
         $error = 0;
-        $info = new Info;
+        $course = new Course;
 
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required'],
-            'is_open' => ['required'],
-            'is_sticky' => ['required'],
+            'name' => ['required'],
+            'teacher' => ['required'],
+            'description' => ['required'],
         ]);
 
         foreach ($request->except('_token', '_method') as $key => $value) {
-            if ($request->filled($key) && $key != 'content') {
-                $info->$key = strip_tags(clean($data[$key]));
-                if ($info->$key == '') {
-                    $error += 1;
-                }
+            $course->$key = strip_tags(clean($data[$key]));
+            if ($course->$key == '') {
+                $error += 1;
             }
         }
 
-        $info->editor = Auth::user()->name;
-        $info->content = clean($request->input('content'));
-
         if ($error == 0) {
             // 寫入log
-            Log::write_log('infos',$request->all());
-            $info->save();
+            Log::write_log('courses',$request->all());
+            $course->save();
         }
         else{
             return back()->withInput()->with('warning', 'action.input_confirm');
@@ -82,10 +76,10 @@ class InfoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Info  $info
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Info $info)
+    public function show(Course $course)
     {
         //
     }
@@ -93,7 +87,7 @@ class InfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Info  $info
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -101,15 +95,15 @@ class InfoController extends Controller
         if (Auth::check() && Auth::user()->permission < '3') {
             return back()->with('warning', 'action.permission.deny');
         }
-        $info = Info::where('id',$id)->first();
-        return view('manage.info.edit',compact('info'));
+        $course = Course::where('id',$id)->first();
+        return view('manage.course.edit',compact('course'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Info  $info
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -118,31 +112,25 @@ class InfoController extends Controller
             return back()->with('warning', 'action.permission.deny');
         }
         $error = 0;
-        $info = Info::where('id',$id)->first();
+        $course = Course::where('id',$id)->first();
 
         $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required'],
-            'is_open' => ['required'],
-            'is_sticky' => ['required'],
+            'name' => ['required'],
+            'teacher' => ['required'],
+            'description' => ['required'],
         ]);
 
         foreach ($request->except('_token', '_method') as $key => $value) {
-            if ($request->filled($key) && $key != 'content') {
-                $info->$key = strip_tags(clean($data[$key]));
-                if ($info->$key == '') {
-                    $error += 1;
-                }
+            $course->$key = strip_tags(clean($data[$key]));
+            if ($course->$key == '') {
+                $error += 1;
             }
         }
 
-        $info->editor = Auth::user()->name;
-        $info->content = clean($request->input('content'));
-
-        if ($error == 0) {
+        if ($error == 0 && $data) {
             // 寫入log
-            Log::write_log('infos',$request->all());
-            $info->save();
+            Log::write_log('courses',$request->all());
+            $course->save();
         }
         else{
             return back()->withInput()->with('warning', 'action.input_confirm');
@@ -154,7 +142,7 @@ class InfoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Info  $info
+     * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -163,40 +151,8 @@ class InfoController extends Controller
             return back()->with('warning', 'action.permission.deny');
         }
         // 寫入log
-        Log::write_log('infos',Info::where('id', $id)->first());
-        Info::destroy($id);
+        Log::write_log('courses',Course::where('id', $id)->first());
+        course::destroy($id);
         return back()->with('success','action.delete_success');
-    }
-    /**
-     * [info_detail 顯示消息內容]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */
-    public function infodetail($id)
-    {
-        $info_detail = Info::where('id',$id)->first();
-        return view('detail',compact('info_detail'));
-    }
-
-    //拖曳排序
-    public function sort(Request $request)
-    {
-        if (Auth::check() && Auth::user()->permission < '3') {
-            return back()->with('warning', 'action.permission.deny');
-        }
-
-        $info_stickys = Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
-
-        foreach ($info_stickys as $info) {
-            foreach ($request->order as $order) {
-                if ($order['id'] == $info->id) {
-                    $info->update(['sort' => $order['position']]);
-                }
-            }
-        }
-        $sort = DB::table('infos')->where('is_sticky',1)->where('is_open',1)->select('title','sort')->orderby('sort')->get();
-        Log::write_log('infos',$sort,'action.sort');
-
-        return response('Update Successfully.', 200);
     }
 }

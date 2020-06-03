@@ -52,6 +52,13 @@ return [
         'is_open' => '是否開放',
     ],
 
+    'course' => [
+        'course' => '課程',
+        'name' => '課程名稱',
+        'teacher' => '授課教師',
+        'description' => '課程大綱',
+    ],
+
     'info' => [
         'info' => '消息',
         'title' => '標題',
@@ -86,6 +93,13 @@ return [
         'rce' => '閱讀 、新增 、修改',
         'rced' => '閱讀 、新增 、修改 、刪除',
         'deny' => '權限不足，拒絕訪問 !'
+    ],
+
+    'student' => [
+        'student' => '學生',
+        'name' => '姓名',
+        'student_id' => '學號',
+        'course' => '修課名稱',
     ],
 
     'user' => [

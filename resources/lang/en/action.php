@@ -52,6 +52,13 @@ return [
         'is_open' => 'Open',
     ],
 
+    'course' => [
+        'course' => 'Course',
+        'name' => 'Name',
+        'teacher' => 'Teacher',
+        'description' => 'Description',
+    ],
+
     'info' => [
         'info' => 'Information ',
         'title' => 'Title',
@@ -86,6 +93,13 @@ return [
         'rce' => 'Read 、Create 、Edit',
         'rced' => 'Read 、Create 、Edit 、Delete',
         'deny' => 'Permission Denied !'
+    ],
+
+    'student' => [
+        'student' => 'Student',
+        'name' => 'Name',
+        'student_id' => 'Student ID',
+        'course' => 'Course',
     ],
 
     'user' => [

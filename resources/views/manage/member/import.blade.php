@@ -11,19 +11,15 @@
                     </div>
 
                     <div class="card-body">
+
                         @if (isset($failures))
                             <div class="alert alert-danger" role="alert">
                                 <strong>Errors:</strong>
-
                                 <ul>
                                     @foreach ($failures as $failure)
                                         @foreach ($failure->errors() as $error)
-                                            <li>{{ $failure->row() }}{{ $error }}</li>
+                                            <li>{{ $failure->row() }}. {{ $error }}</li>
                                         @endforeach
-                                        {{-- <li>{{ $failure->row() }}</li>
-                                        <li>{{ $failure->attribute() }}</li>
-                                        <li>{{ $failure->errors() }}</li>
-                                        <li>{{ $failure->values() }}</li> --}}
                                     @endforeach
                                 </ul>
                             </div>
