@@ -12,8 +12,8 @@
 					@csrf
 					<ul class="list-inline">
 						<li class="list-inline-item">{{ App\Button::Create() }}</li>
-						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ __('Filter') }}</a></li>
-						<li class="list-inline-item">{{ App\Button::To(false,route('member.index'),__('Reset'),null,'btn-secondary','undo') }}</li>
+						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('action.filter') }}</a></li>
+						<li class="list-inline-item">{{ App\Button::To(false,route('member.index'),trans('action.reset'),null,'btn-secondary','undo') }}</li>
 					</ul>
 					{{-- 篩選器設定 --}}
                     <div class="collapse" id="search">
@@ -67,15 +67,22 @@
                                         <td style="display:none">{{ $user->permission }}</td>
                                         <td>{{ trans(App\Enum::permission[$user->permission]) }}</td>
                                         <td>
-                                            <form class="d-inline" action="{{ route('member.edit',$user->id) }}" method="GET">
-                                                @csrf
-                                                {{ App\Button::edit($user->id) }}
-                                            </form>
-                                            <form class="d-inline" action="{{ route('member.destroy',$user->id) }}" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                {{ App\Button::deleting($user->id) }}
-                                            </form>
+                                            <div class="dropdown">
+                                                <button class="btn bmd-btn-icon dropdown-toggle" type="button" id="ex1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu" aria-labelledby="ex1">
+                                                    <form action="{{ route('member.edit',$user->id) }}" method="GET">
+                                                        @csrf
+                                                        {{ App\Button::edit($user->id) }}
+                                                    </form>
+                                                    <form action="{{ route('member.destroy',$user->id) }}" method="POST">
+                                                        @method('DELETE')
+                                                        @csrf
+                                                        {{ App\Button::deleting($user->id) }}
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </td>
 									</tr>
 		                		@endforeach

@@ -21,7 +21,6 @@ return [
     'filter' => 'Filter',
     'frontstage' => 'Frontstage',
     'input_confirm' => 'Please confirm input !',
-    'import' => 'Import',
     'keep' => 'Data has been retained',
     'manage' => 'Manage',
     'no' => 'No',
@@ -57,6 +56,15 @@ return [
         'name' => 'Name',
         'teacher' => 'Teacher',
         'description' => 'Description',
+    ],
+
+    'import' => [
+        'import' => 'Import',
+        'success' => 'Successfully Import',
+        'failed' => 'Import Failed',
+        'not_exist' => 'This course is not exist !',
+        'id_duplicate' => 'Student ID duplicate !',
+        'some_errors' => 'Some columns failed verification and the following problems occurred, others have been imported !',
     ],
 
     'info' => [

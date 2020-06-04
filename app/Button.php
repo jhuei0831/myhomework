@@ -41,7 +41,7 @@ class Button extends Model
         {
             $url = URL::full();
             echo "<a class='btn btn-sm btn-primary' href='{$url}/import'>";
-            echo    "<i class='fas fa-plus'></i>&nbsp;".trans('action.import');
+            echo    "<i class='fas fa-file-import'></i>&nbsp;".trans('action.import.import');
             echo "</a>";
         }
 

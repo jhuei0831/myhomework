@@ -21,7 +21,6 @@ return [
     'filter' => '篩選',
     'frontstage' => '前台頁面',
     'input_confirm' => '請確認輸入!',
-    'import' => '上傳',
     'keep' => '資料已保留',
     'manage' => '管理',
     'no' => '否',
@@ -57,6 +56,15 @@ return [
         'name' => '課程名稱',
         'teacher' => '授課教師',
         'description' => '課程大綱',
+    ],
+
+    'import' => [
+        'import' => '匯入',
+        'success' => '匯入成功',
+        'failed' => '匯入失敗',
+        'not_exist' => '該課程不存在!',
+        'id_duplicate' => '學號重複!',
+        'some_errors' => '有幾行沒通過驗證出現以下問題，其餘已匯入!',
     ],
 
     'info' => [

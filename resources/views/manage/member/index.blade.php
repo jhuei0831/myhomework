@@ -14,7 +14,6 @@
 					@csrf
 					<ul class="list-inline">
 						<li class="list-inline-item">{{ App\Button::Create() }}</li>
-                        <li class="list-inline-item">{{ App\Button::Import() }}</li>
 						<li class="list-inline-item">
                             <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('action.filter') }}</a>
                         </li>

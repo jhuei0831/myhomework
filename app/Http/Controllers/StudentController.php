@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Student;
 use App\Log;
 use App\Course;
+use App\Imports\StudentImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StudentController extends Controller
 {
@@ -21,6 +23,27 @@ class StudentController extends Controller
     {
         $all_students = Student::paginate();
         return view('manage.student.index',compact('all_students'));
+    }
+
+    public function search(Request $request)
+    {
+        $name = $request->name;
+        $student_id = $request->student_id;
+        $course = $request->course;
+
+        $students_search = Student::when($name, function ($q) use ($name) {
+            return $q->where('name', 'like', '%' . $name . '%');
+        })
+        ->when($student_id, function ($q) use ($student_id) {
+            return $q->where('student_id', 'like', '%' . $student_id . '%');
+        })
+        ->when($course, function ($q) use ($course) {
+            return $q->where('course', 'like', '%' . $course . '%');
+        })
+        ->paginate()
+        ->appends($request->all());
+
+        return view('manage.student.search', compact('students_search'));
     }
 
     /**
@@ -159,5 +182,23 @@ class StudentController extends Controller
         Log::write_log('students',student::where('id', $id)->first());
         Student::destroy($id);
         return back()->with('success','action.delete_success');
+    }
+
+    // 學生上傳
+    function import(Request $request)
+    {
+        $import = new StudentImport();
+        $import->import(request()->file('file'));
+        $failures = $import->failures();
+        if (json_encode($failures,JSON_UNESCAPED_UNICODE) != '[]') {
+            // 寫入log
+            Log::write_log('students', 'students', 'action.import.failed');
+            return view('manage.student.import', compact('failures'));
+        }
+        else{
+            // 寫入log
+            Log::write_log('students', 'students', 'action.import.success');
+            return back()->with('success', 'action.import.success');
+        }
     }
 }
