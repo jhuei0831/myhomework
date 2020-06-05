@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use App\Homework;
+use App\Info;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,15 +52,25 @@ Route::prefix('manage')->middleware('auth')->group(function(){
     Route::resource('info', 'InfoController');
     Route::resource('course', 'CourseController');
     Route::resource('student', 'StudentController');
+    Route::resource('homework', 'HomeworkController');
 });
 
 //在各視圖中可直接使用以下參數
 View::composer(['*'], function ($view) {
     $config = DB::table('configs')->where('id','1')->first();
     Config::set('app.name', $config->app_name);
-    $infos = App\Info::where('is_sticky',0)->where('is_open',1)->orderby('updated_at')->paginate(10);
-    $info_stickys = App\Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
+    $infos = Info::where('is_sticky',0)->where('is_open',1)->orderby('updated_at')->paginate(10);
+    $info_stickys = Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
+    if (Auth::check()) {
+        $homeworks = DB::table('homeworks')
+            ->leftJoin('students', 'homeworks.course', '=', 'students.course')
+            ->where('students.student_id', Auth::user()->student_id)
+            ->get();
+        $view->with('homeworks',$homeworks);
+    }
+
     $view->with('config',$config);
     $view->with('infos',$infos);
     $view->with('info_stickys',$info_stickys);
+
 });

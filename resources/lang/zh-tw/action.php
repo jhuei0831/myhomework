@@ -58,6 +58,15 @@ return [
         'description' => '課程大綱',
     ],
 
+    'homework' => [
+        'homework' => '作業',
+        'course' => '課程',
+        'subject' => '題目',
+        'description' => '敘述',
+        'deadline' => '截止日期',
+    ],
+
+
     'import' => [
         'import' => '匯入',
         'success' => '匯入成功',

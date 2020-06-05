@@ -22,7 +22,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <label for="content">{{ trans('action.info.content') }}</label>
+                            <label for="content">{{ trans('action.info.content') }}</label><br>
                             <textarea id="content" name="content" class="form-control" required>{!! old('content') !!}</textarea>
                         </div>
 

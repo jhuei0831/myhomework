@@ -13,29 +13,35 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered text-center">
+                            <thead>
+                                <tr class="table-info active">
+                                    <th>{{ trans('homework.subject') }}</th>
+                                    <th>{{ trans('homework.description') }}</th>
+                                    <th>{{ trans('homework.end_time') }}</th>
+                                    <th>{{ trans('homework.hand_in_time') }}</th>
+                                    <th>{{ trans('homework.grade') }}</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($homeworks as $homework)
+                                    <tr>
+                                        <td>{{ $homework->subject }}</td>
+                                        <td>
+                                            <a class="btn btn-primary" data-toggle="collapse" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ $homework->subject }}</a>
+                                        </td>
+                                        <td>{{ $homework->deadline }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
 
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">{{ trans('homework.number') }}</th>
-                                <th scope="col">{{ trans('homework.subject') }}</th>
-                                <th scope="col">{{ trans('homework.end_time') }}</th>
-                                <th scope="col">{{ trans('homework.hand_in_time') }}</th>
-                                <th scope="col">{{ trans('homework.grade') }}</th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                                <td>@mdo</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

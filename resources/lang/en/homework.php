@@ -7,5 +7,6 @@ return [
     'end_time' => 'Deadline',
     'hand_in_time' => 'Assignment Time',
     'grade' => 'Grade',
+    'description' => 'Description',
 
 ];

@@ -58,6 +58,14 @@ return [
         'description' => 'Description',
     ],
 
+    'homework' => [
+        'homework' => 'Homework',
+        'course' => 'Course',
+        'subject' => 'Subject',
+        'description' => 'Description',
+        'deadline' => 'Deadline',
+    ],
+
     'import' => [
         'import' => 'Import',
         'success' => 'Successfully Import',
