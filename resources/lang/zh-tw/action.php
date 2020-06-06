@@ -31,6 +31,7 @@ return [
     'submit' => '送出',
     'search' => '搜尋',
     'update_success' => '更新成功!',
+    'upload' => '上傳',
     'yes' => '是',
 
     'news' => '最新消息',

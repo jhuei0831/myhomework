@@ -31,6 +31,7 @@ return [
     'submit' => 'Submit',
     'search' => 'Search',
     'update_success' => 'Successfully Updated !',
+    'upload' => 'Upload',
     'yes' => 'Yes',
 
     'news' => 'News',

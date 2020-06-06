@@ -41,7 +41,7 @@
 								@foreach ($all_homeworks as $homework)
 									<tr>
 										<td>{{ $homework->course }}</td>
-										<td><a class="btn btn-primary" data-toggle="collapse" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ $homework->subject }}</a></td>
+										<td><a data-toggle="collapse" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ $homework->subject }}</a></td>
                                         <td>{{ $homework->deadline }}</td>
 										<td>
                                             <div class="dropdown">
@@ -63,7 +63,16 @@
 										</td>
 									</tr>
                                     <tr class="collapse" id="{{ $homework->id }}">
-                                        <td align="left" colspan="4">{!! $homework->description !!}</td>
+                                        <td align="left" colspan="6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    {!! $homework->description !!}
+                                                </div>
+                                                <div class="card-footer">
+                                                    123
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
 		                		@endforeach
 		                	</tbody>
