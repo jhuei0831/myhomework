@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $students = Student::where('student_id', Auth::user()->student_id)->get();
+
+        return view('home',compact('students'));
     }
 }

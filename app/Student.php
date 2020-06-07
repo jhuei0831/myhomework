@@ -13,4 +13,15 @@ class Student extends Model
     protected $fillable = [
         "name", "student_id" , "course",
     ];
+
+    public function homeworks()
+    {
+        return $this->hasMany('App\Homework', 'course', 'course');
+    }
+
+    public function uploads()
+    {
+        return $this->hasMany('App\Upload', 'student_id', 'id');
+    }
+
 }

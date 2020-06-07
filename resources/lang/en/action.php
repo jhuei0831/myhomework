@@ -129,4 +129,13 @@ return [
         'title' => 'User ',
     ],
 
+    'upload' => [
+        'upload' => 'Upload',
+        'id' => 'ID',
+        'student_id' => 'Student ID',
+        'homework' => 'Subject',
+        'grade' => 'Grade',
+        'updated_at' => 'Updated',
+    ],
+
 ];

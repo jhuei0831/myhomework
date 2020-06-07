@@ -31,7 +31,6 @@ return [
     'submit' => '送出',
     'search' => '搜尋',
     'update_success' => '更新成功!',
-    'upload' => '上傳',
     'yes' => '是',
 
     'news' => '最新消息',
@@ -128,6 +127,15 @@ return [
         'password' => '密碼',
         'student_id' => '學號',
         'title' => '使用者'
+    ],
+
+    'upload' => [
+        'upload' => '上傳',
+        'id' => '編號',
+        'student_id' => '學號',
+        'homework' => '作業題目',
+        'grade' => '成績',
+        'updated_at' => '更新時間',
     ],
 
 ];

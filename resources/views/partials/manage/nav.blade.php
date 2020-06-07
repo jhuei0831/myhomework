@@ -20,6 +20,9 @@
                     <a class="nav-link" href="{{ route('homework.index') }}">{{ trans('action.homework.homework').trans('action.manage') }}</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('upload.index') }}">{{ trans('action.upload.upload').trans('action.manage') }}</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{{ route('info.index') }}">{{ trans('action.info.info').trans('action.manage') }}</a>
                 </li>
                 @if (Auth::check() && Auth::user()->permission > '4')

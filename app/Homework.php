@@ -13,4 +13,9 @@ class Homework extends Model
     protected $fillable = [
         "course", "subject" , "description", "deadline",
     ];
+
+    public function student()
+    {
+        return $this->belongsTo('App\Student', 'course', 'course');
+    }
 }

@@ -24,7 +24,7 @@ class ConfigController extends Controller
     public function index()
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         return view('manage.config.index');
     }
@@ -70,7 +70,7 @@ class ConfigController extends Controller
     public function edit($id)
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
         $config = Config::where('id',$id)->first();
         return view(('manage.config.edit'),compact('config'));
@@ -86,7 +86,7 @@ class ConfigController extends Controller
     public function update(Request $request,$id)
     {
         if (Auth::check() && Auth::user()->permission < '5') {
-            return back()->with('warning', '權限不足以訪問該頁面 !');
+            return back()->with('warning', 'action.permission.deny');
         }
 
         $config = Config::where('id',$id)->first();

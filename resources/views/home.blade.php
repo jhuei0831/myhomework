@@ -19,55 +19,58 @@
                                     <th>{{ trans('homework.end_time') }}</th>
                                     <th>{{ trans('homework.hand_in_time') }}</th>
                                     <th>{{ trans('homework.grade') }}</th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($homeworks as $homework)
-                                    <tr>
-                                        <td>{{ $homework->subject }}</td>
-                                        <td>
-                                            <a href="#" data-toggle="collapse" data-target="#{{ $homework->subject }}" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-chevron-circle-down"></i></a>
-                                        </td>
-                                        <td>{{ $homework->deadline }}</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr id="{{ $homework->subject }}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                                        <td align="left" colspan="6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    {!! $homework->description !!}
-                                                </div>
-                                                <div class="card-footer text-center">
-                                                    <form method="POST" action="{{ route('config.update' , $config->id) }}" enctype="multipart/form-data">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <input type="file" class="form-control @error('background') is-invalid @enderror" id="background" name="background" placeholder="{{ trans('action.config.background') }}" value="{{ $config->background }}">
-                                                                <img id="holder" style="margin-top:15px;max-height:100px;">
-                                                                <span class='input-group-text'>
-                                                                    @if($config->background)
-                                                                    <a target='_blank' href="{{ asset('storage/uploads/images/'.$config->background) }}"><i class="far fa-image"></i>&nbsp;觀看檔案</a>
-                                                                    @else
-                                                                    <a href="#"><i class="fas fa-times-circle"></i>&nbsp;目前沒有檔案</a>
-                                                                    @endif
-                                                                </span>
-                                                                @error('background')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
+                                @foreach ($students as $student)
+                                    @foreach ($student->homeworks as $homework)
+                                        <tr>
+                                            <td>{{ $homework->subject }}</td>
+                                            <td>
+                                                <a href="#" data-toggle="collapse" data-target="#{{ $homework->subject }}" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-chevron-circle-down"></i></a>
+                                            </td>
+                                            <td>{{ $homework->deadline }}</td>
+                                            @foreach ($student->uploads as $upload)
+                                                @if ($upload->homework_id == $homework->id)
+                                                    <td>{{ $upload->updated_at }}</td>
+                                                    <td>{{ $upload->grade }}</td>
+                                                @endif 
+                                            @endforeach 
+                                        </tr>
+                                        <tr id="{{ $homework->subject }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <td align="left" colspan="6">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        {!! $homework->description !!}
+                                                    </div>
+                                                    <div class="card-footer text-center">
+                                                        <form method="POST" action="{{ route('homework.upload' , [$homework->id, $student->id]) }}" enctype="multipart/form-data">
+                                                            @csrf
+                                                            @method('POST')
+                                                            <div class="form-group">
+                                                                <div class="input-group">
+                                                                    <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file">
+                                                                    <span class='input-group-text'>
+                                                                        @if($config->background)
+                                                                        <a target='_blank' href="{{ asset('storage/uploads/images/'.$config->background) }}"><i class="far fa-image"></i>&nbsp;觀看檔案</a>
+                                                                        @else
+                                                                        <a href="#"><i class="fas fa-times-circle"></i>&nbsp;目前沒有檔案</a>
+                                                                        @endif
                                                                     </span>
-                                                                @enderror
+                                                                    @error('file')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <input type="submit" class="btn btn-raised btn-primary" value="{{ trans('action.upload') }}">
-                                                    </form>
+                                                            <input type="submit" class="btn btn-raised btn-primary" value="{{ trans('action.upload.upload') }}">
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                            </td>
+                                        </tr>  
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

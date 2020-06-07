@@ -27,6 +27,7 @@
     <div id="app">
         @include('partials.home.nav')
         <main class="py-4">
+            @include('partials.message')
             @yield('content')
         </main>
     </div>

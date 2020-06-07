@@ -16,7 +16,7 @@ class CreateHomeworkTable extends Migration
         Schema::create('homeworks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('course')->comment('課程名稱');
-            $table->string('subject')->comment('題目');
+            $table->string('subject')->unique()->comment('題目');
             $table->longText('description')->comment('敘述');
             $table->datetime('deadline')->comment('截止日期');
             $table->timestamps();
@@ -30,6 +30,6 @@ class CreateHomeworkTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('homework');
+        Schema::dropIfExists('homeworks');
     }
 }

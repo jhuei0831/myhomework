@@ -38,9 +38,11 @@ Route::middleware('auth')->group(function() {
     Route::any('manage/log/search', 'LogController@search')->name('log.search');
     Route::any('manage/member/search', 'MemberController@search')->name('member.search');
     Route::any('manage/student/search', 'StudentController@search')->name('student.search');
+    Route::any('manage/upload/search', 'UploadController@search')->name('upload.search');
     //上傳
     Route::any('manage/student/import', function () {return view('manage.student.import');});
     Route::any('manage/student/upload', 'StudentController@import')->name('student.import');
+    Route::post('homework/{id}/{student_id}', 'UploadController@upload')->name('homework.upload');
 });
 
 // Manage
@@ -53,6 +55,7 @@ Route::prefix('manage')->middleware('auth')->group(function(){
     Route::resource('course', 'CourseController');
     Route::resource('student', 'StudentController');
     Route::resource('homework', 'HomeworkController');
+    Route::resource('upload', 'UploadController');
 });
 
 //在各視圖中可直接使用以下參數
@@ -61,16 +64,8 @@ View::composer(['*'], function ($view) {
     Config::set('app.name', $config->app_name);
     $infos = Info::where('is_sticky',0)->where('is_open',1)->orderby('updated_at')->paginate(10);
     $info_stickys = Info::where('is_sticky',1)->where('is_open',1)->orderby('sort')->get();
-    if (Auth::check()) {
-        $homeworks = DB::table('homeworks')
-            ->leftJoin('students', 'homeworks.course', '=', 'students.course')
-            ->where('students.student_id', Auth::user()->student_id)
-            ->get();
-        $view->with('homeworks',$homeworks);
-    }
 
     $view->with('config',$config);
     $view->with('infos',$infos);
     $view->with('info_stickys',$info_stickys);
-
 });
