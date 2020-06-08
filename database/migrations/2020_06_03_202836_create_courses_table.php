@@ -15,7 +15,7 @@ class CreateCoursesTable extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name')->comment('課程名稱');
+            $table->string('name')->unique()->comment('課程名稱');
             $table->string('teacher')->comment('授課教師');
             $table->string('description')->comment('課程大綱');
             $table->timestamps();

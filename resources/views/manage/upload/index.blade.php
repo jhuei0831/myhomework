@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4><i class="fas fa-clipboard-list"></i> {{ trans('action.upload.upload').' '.trans('action.manage') }}</h4>
+                    <h4><i class="fas fa-clipboard-list"></i> {{ trans('action.upload.upload').trans('action.manage') }}</h4>
                 </div>
                 <div class="card-body">
                 	<form action="{{ route('upload.search') }}" method="post">
@@ -56,10 +56,11 @@
 										<td>{{ $upload->grade }}</td>
 										<td>{{ $upload->updated_at }}</td>
 										<td>
-											<form action="{{ route('upload.edit',$upload->id) }}" method="GET">
+											{{-- <form action="{{ route('upload.edit',$upload->id) }}" method="GET">
 											@csrf
 											{{ App\Button::edit($upload->id) }}
-											</form>
+											</form> --}}
+											<a target='_blank' href="{{ asset('storage/uploads/homework/'.$upload->homework->subject.'/'.$upload->file) }}"><i class="fas fa-file-alt"></i></a>
 										</td>
 									</tr>
 								@endforeach

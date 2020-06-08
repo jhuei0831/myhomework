@@ -64,6 +64,7 @@ return [
         'subject' => '題目',
         'description' => '敘述',
         'deadline' => '截止日期',
+        'notice1' => '點擊題目查看敘述。',
     ],
 
 

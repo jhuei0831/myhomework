@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans('action.student.student').trans('action.search') }}</div>
+                <div class="card-header">
+                    <h4><i class="fas fa-user-graduate"></i> {{ trans('action.student.student').trans('action.search') }}</h4>
+                </div>
 
                 <div class="card-body">
                 	<form action="{{ route('student.search') }}" method="post">

@@ -65,6 +65,7 @@ return [
         'subject' => 'Subject',
         'description' => 'Description',
         'deadline' => 'Deadline',
+        'notice1' => 'Click subject and see the description.',
     ],
 
     'import' => [

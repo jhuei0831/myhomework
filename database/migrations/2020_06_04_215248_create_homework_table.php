@@ -16,6 +16,7 @@ class CreateHomeworkTable extends Migration
         Schema::create('homeworks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('course')->comment('課程名稱');
+            $table->foreign('course')->references('name')->on('courses')->onUpdate('cascade')->onDelete('cascade');
             $table->string('subject')->unique()->comment('題目');
             $table->longText('description')->comment('敘述');
             $table->datetime('deadline')->comment('截止日期');

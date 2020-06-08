@@ -1,5 +1,5 @@
 @extends('layouts.manage.app')
-@section('title', trans('action.course.title').trans('action.edit'))
+@section('title', trans('action.course.course').trans('action.edit'))
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">

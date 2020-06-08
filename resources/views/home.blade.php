@@ -18,6 +18,7 @@
                                     <th>{{ trans('homework.description') }}</th>
                                     <th>{{ trans('homework.end_time') }}</th>
                                     <th>{{ trans('homework.hand_in_time') }}</th>
+                                    <th>{{ trans('homework.file') }}</th>
                                     <th>{{ trans('homework.grade') }}</th>
                                 </tr>
                             </thead>
@@ -27,36 +28,36 @@
                                         <tr>
                                             <td>{{ $homework->subject }}</td>
                                             <td>
-                                                <a href="#" data-toggle="collapse" data-target="#{{ $homework->subject }}" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-chevron-circle-down"></i></a>
+                                                <button data-toggle="collapse" class="btn btn-sm des" value="{!! $homework->description !!}" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-eye"></i></button>
                                             </td>
                                             <td>{{ $homework->deadline }}</td>
-                                            @foreach ($student->uploads as $upload)
-                                                @if ($upload->homework_id == $homework->id)
-                                                    <td>{{ $upload->updated_at }}</td>
-                                                    <td>{{ $upload->grade }}</td>
-                                                @endif 
-                                            @endforeach 
+                                            @if (json_encode($student->uploads) != '[]')
+                                                @foreach ($student->uploads as $upload)
+                                                    @if ($upload->homework_id == $homework->id)
+                                                        <td>{{ $upload->updated_at }}&nbsp;</td>
+                                                        <td>
+                                                            <a href="#" data-toggle="collapse" data-target="#{{ $homework->subject }}" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-file-upload"></i></a>
+                                                            <a target='_blank' href="{{ asset('storage/uploads/homework/'.$homework->subject.'/'.$upload->file) }}"><i class="fas fa-file-alt"></i></a>
+                                                        </td>
+                                                        <td>{{ $upload->grade }}</td>                                                    
+                                                    @endif 
+                                                @endforeach     
+                                            @else
+                                                <td></td>
+                                                <td><a href="#" data-toggle="collapse" data-target="#{{ $homework->subject }}" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-file-upload"></i></a>
+                                                <td></td>    
+                                            @endif  
                                         </tr>
                                         <tr id="{{ $homework->subject }}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                             <td align="left" colspan="6">
                                                 <div class="card">
-                                                    <div class="card-body">
-                                                        {!! $homework->description !!}
-                                                    </div>
-                                                    <div class="card-footer text-center">
+                                                    <div class="card-body text-center">
                                                         <form method="POST" action="{{ route('homework.upload' , [$homework->id, $student->id]) }}" enctype="multipart/form-data">
                                                             @csrf
                                                             @method('POST')
                                                             <div class="form-group">
                                                                 <div class="input-group">
                                                                     <input type="file" class="form-control @error('file') is-invalid @enderror" id="file" name="file">
-                                                                    <span class='input-group-text'>
-                                                                        @if($config->background)
-                                                                        <a target='_blank' href="{{ asset('storage/uploads/images/'.$config->background) }}"><i class="far fa-image"></i>&nbsp;觀看檔案</a>
-                                                                        @else
-                                                                        <a href="#"><i class="fas fa-times-circle"></i>&nbsp;目前沒有檔案</a>
-                                                                        @endif
-                                                                    </span>
                                                                     @error('file')
                                                                         <span class="invalid-feedback" role="alert">
                                                                             <strong>{{ $message }}</strong>
@@ -64,7 +65,7 @@
                                                                     @enderror
                                                                 </div>
                                                             </div>
-                                                            <input type="submit" class="btn btn-raised btn-primary" value="{{ trans('action.upload.upload') }}">
+                                                            <input type="submit" class="btn btn-raised btn-primary" value="{{ trans('action.upload.upload') }}" {{ ($homework->deadline <= now()) ? "disabled" : "" }}>
                                                         </form>
                                                     </div>
                                                 </div>
@@ -84,15 +85,18 @@
 @section('script')
 @parent
 <script>
-    $('.btn-upload').on('click',function () {
+    $('.des').on('click',function () {
+        event.preventDefault();
+        let description = $(this).val();
         Swal.fire({
-            title: '<strong>HTML <u>example</u></strong>',
-            html:
-                '<form></form>',
-            showCloseButton: true,
+            title: "{{ trans('action.homework.description') }}",
+            html: description,
+            width: '80%',
             showCancelButton: false,
-            showConfirmButton: false,
-        })
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '{{ trans('action.confirm') }}',
+            })
     });
+    // Swal.fire('Any fool can use a computer')
 </script>
 @show

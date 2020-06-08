@@ -8,4 +8,5 @@ return [
     'hand_in_time' => '繳交時間',
     'grade' => '成績',
     'description' => '敘述',
+    'file' => '檔案',
 ];

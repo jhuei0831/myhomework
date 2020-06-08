@@ -16,8 +16,9 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->comment('姓名');
-            $table->string('student_id')->comment('學號');
+            $table->string('student_id')->unique()->comment('學號');
             $table->string('course')->comment('修課名稱');
+            $table->foreign('course')->references('name')->on('courses')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

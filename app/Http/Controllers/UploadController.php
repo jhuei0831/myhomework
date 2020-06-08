@@ -143,7 +143,7 @@ class UploadController extends Controller
             return back()->with('warning', '上傳失敗');
         }
         elseif ($homework->deadline <= now()) {
-            return back()->with('error', '已超過截止時間QQ');
+            return back()->with('error', '你是不是覺得自己很聰明QQ');
         }
         else {
             $file = $request->file('file');

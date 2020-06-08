@@ -8,23 +8,25 @@
                 <div class="card-header">
                     <h4><i class="fas fa-book-open"></i> {{ trans('action.homework.homework').trans('action.manage') }}</h4>
                 </div>
-
                 <div class="card-body">
 					<ul class="list-inline">
 						<li class="list-inline-item">{{ App\Button::Create() }}</li>
 						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('action.filter') }}</a></li>
-					</ul>
+                    </ul>
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fas fa-info-circle"></i> {{ trans('action.homework.notice1') }}
+                    </div>
                     {{-- 篩選器設定 --}}
                     <div class="collapse" id="search">
 	                    <div class="form-row">
-                            <div id="filter_col2" data-column="1" class='form-group col-md-3'>
-                                <label>{{ trans('action.homework.subject') }}</label>
-                                <input type="text" class="form-control column_filter" id="col1_filter">
-                            </div>
-							<div id="filter_col1" data-column="0" class='form-group col-md-3'>
+                            <div id="filter_col1" data-column="0" class='form-group col-md-3'>
                                 <label>{{ trans('action.homework.course') }}</label>
 								<input type="text" class="form-control column_filter" id="col0_filter">
 							</div>
+                            <div id="filter_col2" data-column="1" class='form-group col-md-3'>
+                                <label>{{ trans('action.homework.subject') }}</label>
+                                <input type="text" class="form-control column_filter" id="col1_filter">
+                            </div>				
 						</div>
 					</div>
 					<div class="table-responsive">
@@ -41,7 +43,7 @@
 								@foreach ($all_homeworks as $homework)
 									<tr>
 										<td>{{ $homework->course }}</td>
-										<td><a data-toggle="collapse" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ $homework->subject }}</a></td>
+										<td><button data-toggle="collapse" class="btn btn-raised btn-secondary des" value="{!! $homework->description !!}" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">{{ $homework->subject }}</button></td>
                                         <td>{{ $homework->deadline }}</td>
 										<td>
                                             <div class="dropdown">
@@ -62,18 +64,6 @@
                                             </div>
 										</td>
 									</tr>
-                                    <tr class="collapse" id="{{ $homework->id }}">
-                                        <td align="left" colspan="6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    {!! $homework->description !!}
-                                                </div>
-                                                <div class="card-footer">
-                                                    123
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
 		                		@endforeach
 		                	</tbody>
 	                    </table>
@@ -90,7 +80,18 @@
 @section('script')
 @parent
 <script>
-
+    $('.des').on('click',function () {
+        event.preventDefault();
+        let description = $(this).val();
+        Swal.fire({
+            title: "{{ trans('action.homework.description') }}",
+            html: description,
+            width: '80%',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: '{{ trans('action.confirm') }}',
+            })
+    });
     // Swal.fire('Any fool can use a computer')
 </script>
 @show

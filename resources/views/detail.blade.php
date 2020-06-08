@@ -17,12 +17,15 @@
                         <p><span class="badge badge-pill badge-primary">
                             {{ trans('action.info.editor').' : '.$info_detail->editor }}
                         </span></p>
-                        <p><span class="badge badge-pill badge-primary">
+                        {{-- <p><span class="badge badge-pill badge-primary">
                             {{ trans('action.info.created_at').' : '.$info_detail->created_at }}
-                        </span></p>
+                        </span></p> --}}
                         <p><span class="badge badge-pill badge-primary">
                             {{ trans('action.info.updated_at').' : '.$info_detail->updated_at }}
                         </span></p>
+                    </div>
+                    <div class="text-center">
+                        {{ App\Button::GoBack(route('index')) }}
                     </div>
                 </div>
             </div>

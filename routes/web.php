@@ -16,9 +16,7 @@ use App\Info;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', function () { return view('index'); })->name('index');
 
 Auth::routes();
 

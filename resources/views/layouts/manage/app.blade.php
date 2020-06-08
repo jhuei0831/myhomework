@@ -88,7 +88,7 @@
         });
         $('.btn-delete').on('click',function () {
             event.preventDefault();
-            var form = event.target.form;
+            let form = event.target.form;
             Swal.fire({
                 title: '{{ trans('action.delete_confirm1') }}',
                 text: '{{ trans('action.delete_confirm2') }}',
