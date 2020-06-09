@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-white bg-primary">
                     <h4><i class="fas fa-info-circle"></i> {{ trans('action.news') }}</h4>
                 </div>
 
@@ -17,7 +17,7 @@
                     @endif
 
                     <table class="table">
-                        <thead class="thead-light">
+                        <thead class="table-primary">
                             <tr>
                                 <th scope="col"></th>
                                 <th scope="col">{{ trans('action.info.created_at') }}</th>

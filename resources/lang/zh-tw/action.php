@@ -45,7 +45,7 @@ return [
         'font_weight' => '字體粗細',
         'background' => '背景圖片',
         'background_color' => '背景顏色',
-        'navbar_background_color' => '導覽列背景顏色',
+        'navbar_hover_color' => '導覽列滑動顏色',
         'navbar_text_color' => '導覽列文字顏色',
         'navbar_text_size' => '導覽列文字大小',
         'is_open' => '是否開放',
@@ -137,6 +137,9 @@ return [
         'homework' => '作業題目',
         'grade' => '成績',
         'updated_at' => '更新時間',
+        'success' => '上傳成功',
+        'failed' => '上傳失敗',
+        'genius' => 'Genius KEKW QQ'
     ],
 
 ];

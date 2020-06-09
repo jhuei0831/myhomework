@@ -15,14 +15,14 @@ class CreateUploadsTable extends Migration
     {
         Schema::create('uploads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('student_id')->comment('學生id');
-            // $table->foreign('student_id')->references('students')->on('id')->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('homework_id')->comment('作業id');
-            // $table->foreign('homework_id')->references('homeworks')->on('id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('student_id')->constrained('students')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('homework_id')->constrained('homeworks')->onUpdate('cascade')->onDelete('cascade');
             $table->string('file')->comment('作業檔案');
             $table->string('grade')->nullable()->comment('成績');
             $table->timestamps();
         });
+
+
     }
 
     /**

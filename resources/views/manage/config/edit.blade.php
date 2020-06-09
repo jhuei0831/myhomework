@@ -120,9 +120,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="navbar_bcolor">{{ trans('action.config.navbar_background_color')}}</label>
-                                <input id="navbar_bcolor" class="form-control @error('navbar_bcolor') is-invalid @enderror jscolor {required:false}" name="navbar_bcolor" value="{{ $config->navbar_bcolor }}" required>
-                                @error('navbar_bcolor')
+                                <label for="navbar_hcolor">{{ trans('action.config.navbar_hover_color')}}</label>
+                                <input id="navbar_hcolor" class="form-control @error('navbar_hcolor') is-invalid @enderror jscolor {required:false}" name="navbar_hcolor" value="{{ $config->navbar_hcolor }}" required>
+                                @error('navbar_hcolor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

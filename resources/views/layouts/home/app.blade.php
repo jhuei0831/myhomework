@@ -21,8 +21,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @include('partials.home.css')
 </head>
-<body style="background-image: url('{{ asset('background.jpg')}}');font-family:Microsoft JhengHei;">
+<body>
     <div id="app">
         @include('partials.home.nav')
         <main class="py-4">

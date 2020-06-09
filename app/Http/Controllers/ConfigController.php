@@ -98,7 +98,7 @@ class ConfigController extends Controller
             'font_weight' => ['required', 'string', 'max:255'],
             'background_color' => ['nullable','string', 'max:255'],
             'background' => ['image','mimes:jpeg,png,jpg,gif', 'max:2048'],
-            'navbar_bcolor' => ['string', 'max:255'],
+            'navbar_hcolor' => ['string', 'max:255'],
             'navbar_wcolor' => ['string', 'max:255'],
             'navbar_size' => ['string', 'max:255'],
             'background' => ['nullable'],
@@ -108,6 +108,9 @@ class ConfigController extends Controller
         // 逐筆進行htmlpurufier 並去掉<p></p>
         foreach ($request->except('_token', '_method') as $key => $value) {
             if ($request->has('background')) {
+                if ($config->background != NULL) {
+                    $this->deleteOne('/uploads/images/', 'public', $config->background);
+                }
                 // Get image file
                 $image = $request->file('background');
                 // Make a image name based on user name and current timestamp

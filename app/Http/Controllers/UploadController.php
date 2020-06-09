@@ -140,10 +140,10 @@ class UploadController extends Controller
         // 逐筆進行htmlpurufier 並去掉<p></p>
         
         if (!$data) {
-            return back()->with('warning', '上傳失敗');
+            return back()->with('warning', 'action.upload.failed');
         }
         elseif ($homework->deadline <= now()) {
-            return back()->with('error', '你是不是覺得自己很聰明QQ');
+            return back()->with('error', 'action.upload.genius');
         }
         else {
             $file = $request->file('file');
@@ -158,7 +158,7 @@ class UploadController extends Controller
 
             Log::write_log('uploads', $upload);
             $upload->save();
-            return back()->with('success', '上傳成功');
+            return back()->with('success', 'action.upload.success');
         }      
     }
 }

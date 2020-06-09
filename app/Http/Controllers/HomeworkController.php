@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Homework;
 use App\Log;
 use App\Course;
+use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class HomeworkController extends Controller
 {
+    use UploadTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -162,10 +165,14 @@ class HomeworkController extends Controller
     {
         if (Auth::check() && Auth::user()->permission < '4') {
             return back()->with('warning', 'action.permission.deny');
-        }
-        // 寫入log
-        Log::write_log('homeworks',Homework::where('id', $id)->first());
+        }       
+        
+        $homework = Homework::where('id',$id)->first();
+        $folder = 'uploads/homework/'.$homework->subject;
+        $this->deleteFolder($folder);
         Homework::destroy($id);
+        // 寫入log
+        Log::write_log('homeworks', Homework::where('id', $id)->first());
         return back()->with('success','action.delete_success');
     }
 }

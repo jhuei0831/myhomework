@@ -40,7 +40,6 @@ class Enum extends Model
             'DFKai-sb' => '標楷體字型',
             'TwKai' => '臺灣楷體',
             'Microsoft JhengHei' => '微軟正黑體',
-            'Taipei Sans TC' => '台灣黑體'
         ],
         // 'font_weight' => [
         //     'normal' => '正常 ',

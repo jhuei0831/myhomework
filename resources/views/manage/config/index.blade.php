@@ -24,7 +24,7 @@
                                     <th class="text-nowrap text-center">{{ trans('action.config.font_weight') }}</th>
                                     <th class="text-nowrap text-center">{{ trans('action.config.background') }}</th>
                                     <th class="text-nowrap text-center">{{ trans('action.config.background_color') }}</th>
-                                    <th class="text-nowrap text-center">{{ trans('action.config.navbar_background_color') }}</th>
+                                    <th class="text-nowrap text-center">{{ trans('action.config.navbar_hover_color') }}</th>
                                     <th class="text-nowrap text-center">{{ trans('action.config.navbar_text_color') }}</th>
                                     <th class="text-nowrap text-center">{{ trans('action.config.navbar_text_size') }}</th>
                                     <th class="text-nowrap text-center">{{ trans('action.config.is_open') }}</th>
@@ -45,7 +45,7 @@
                                         @endif
                                     </td>
                                     <td style="background-color: #{{ $config->background_color }}"></td>
-                                    <td style="background-color: #{{ $config->navbar_bcolor }}"></td>
+                                    <td style="background-color: #{{ $config->navbar_hcolor }}"></td>
                                     <td style="background-color: #{{ $config->navbar_wcolor }}"></td>
                                     <td style="font-weight: {{ $config->navbar_size }}">{{App\Enum::config['navbar_size'][$config->navbar_size]}}</td>
                                     <td>

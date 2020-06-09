@@ -21,4 +21,9 @@ trait UploadTrait
     {
        Storage::disk($disk)->delete($folder.$filename);
     }
+
+    public function deleteFolder($folder = null, $disk = 'public')
+    {
+       Storage::disk($disk)->deleteDirectory($folder);
+    }
 }

@@ -1,18 +1,3 @@
-<style>
-    .navbar {
-        background-color: transparent;
-        background: transparent;
-        border-color: transparent;
-    }
-    .nav-link{
-        color: aliceblue !important;
-        font-size: 20px !important;
-        font-weight: 600 !important;
-    }
-    .nav-link:hover {
-        color: aqua !important;
-    }
-</style>
 <nav class="navbar navbar-expand-md navbar-dark">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">

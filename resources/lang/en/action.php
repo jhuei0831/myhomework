@@ -46,7 +46,7 @@ return [
         'font_weight' => 'Font Weight',
         'background' => 'Background',
         'background_color' => 'Background Color',
-        'navbar_background_color' => 'Navbar Background Color',
+        'navbar_hover_color' => 'Navbar Hover Color',
         'navbar_text_color' => 'Navbar Text Color',
         'navbar_text_size' => 'Navbar Text Size',
         'is_open' => 'Open',
@@ -137,6 +137,9 @@ return [
         'homework' => 'Subject',
         'grade' => 'Grade',
         'updated_at' => 'Updated',
+        'success' => 'Upload Success',
+        'failed' => 'Upload Failed',
+        'genius' => 'Genius KEKW QQ'
     ],
 
 ];

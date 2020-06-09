@@ -41,7 +41,7 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}">{{ trans('action.frontstage') }}</a>
+                    <a class="nav-link" href="{{ route('index') }}">{{ trans('action.frontstage') }}</a>
                 </li>
                 <!-- Authentication Links -->
                 @guest

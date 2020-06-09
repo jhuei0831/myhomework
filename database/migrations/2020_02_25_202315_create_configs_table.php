@@ -22,8 +22,8 @@ class CreateConfigsTable extends Migration
             $table->string('font_weight')->nullable()->comment('字體粗細');
             $table->string('background')->nullable()->comment('背景');
             $table->string('background_color')->nullable()->comment('背景顏色');
-            $table->string('navbar_bcolor')->nullable()->comment('導覽列背景顏色');
             $table->string('navbar_wcolor')->nullable()->comment('導覽列字體顏色');
+            $table->string('navbar_hcolor')->nullable()->comment('導覽列滑動顏色');
             $table->string('navbar_size')->nullable()->comment('導覽列字體大小');
             $table->boolean('is_open')->default(true)->comment('網站是否開放');
             $table->timestamps();
@@ -36,8 +36,8 @@ class CreateConfigsTable extends Migration
             'font_weight' => '200',
             'background' => 'null',
             'background_color' => 'null',
-            'navbar_bcolor' => '000',
             'navbar_wcolor' => 'fff',
+            'navbar_hcolor' => 'fff',
             'navbar_size' => 'large',
             'is_open' => '1',
             'created_at' => now(),
