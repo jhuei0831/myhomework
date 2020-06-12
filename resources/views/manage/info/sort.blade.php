@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{trans('action.info.info').trans('action.sort')}}</div>
+                <div class="card-header text-white bg-info">
+                    <h4><i class="fas fa-info-circle"></i> {{trans('action.info.info').trans('action.sort')}}</h4>
+                </div>
 
                 <div class="card-body">
 					<ul class="list-unstyled">

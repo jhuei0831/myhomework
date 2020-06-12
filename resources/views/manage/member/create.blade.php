@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <form action="{{ route('member.store') }}" method="POST">
-                    <div class="card-header">
+                    <div class="card-header text-white bg-info">
                         <h4><i class="fas fa-user-circle"></i> {{ trans('action.user.title').trans('action.create') }}</h4>
                     </div>
                     <div class="card-body">

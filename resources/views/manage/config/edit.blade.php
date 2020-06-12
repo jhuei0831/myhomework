@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans('action.config.config').trans('action.edit') }}</div>
+                <div class="card-header text-white bg-info">
+                    <h4><i class="fas fa-cog"></i> {{ trans('action.config.config') }}</h4>
+                </div>
 
                 <div class="card-body">
                     <ul class="list-unstyled">

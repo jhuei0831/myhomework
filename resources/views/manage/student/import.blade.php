@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <form action="{{ route('student.import') }}" method="POST" enctype="multipart/form-data">
-                    <div class="card-header">
+                    <div class="card-header text-white bg-info">
                         <h4><i class="fas fa-user-graduate"></i> {{ trans('action.student.student').trans('action.import.import') }}</h4>
                     </div>
 

@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-white bg-info">
                     <h4><i class="fas fa-cog"></i> {{ trans('action.config.config') }}</h4>
                 </div>
 
                 <div class="card-body">
                     <div class="alert alert-warning" role="alert">
-                        1. {{ trans('action.config.notice1') }}<br>
-                        2. {{ trans('action.config.notice2') }}
+                        <i class="fas fa-info-circle"></i> {{ trans('action.config.notice1') }}<br>
+                        <i class="fas fa-info-circle"></i> {{ trans('action.config.notice2') }}
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered text-center">

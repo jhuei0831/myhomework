@@ -6,7 +6,9 @@
         <div class="col-md-12">
             <div class="card">
                 <form action="{{ route('info.store') }}" method="POST">
-                    <div class="card-header">{{ trans('action.info.info').trans('action.create') }}</div>
+                    <div class="card-header text-white bg-info">
+                        <h4><i class="fas fa-info-circle"></i> {{ trans('action.info.info').trans('action.create') }}</h4>
+                    </div>
                     <div class="card-body">
                         <ul class="list-unstyled">
                             <li>{{ App\Button::GoBack(route('info.index')) }}</li>

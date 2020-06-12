@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-white bg-info">
                     <h4><i class="fas fa-info-circle"></i> {{ trans('action.info.info').trans('action.manage') }}</h4>
                 </div>
 
@@ -16,7 +16,7 @@
 						<li class="list-inline-item"><a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('action.filter') }}</a></li>
 					</ul>
 					<div class="alert alert-warning" role="alert">
-                        {{ trans('action.info.notice1') }}
+                        <i class="fas fa-info-circle"></i> {{ trans('action.info.notice1') }}
                     </div>
                     {{-- 篩選器設定 --}}
                     <div class="collapse" id="search">

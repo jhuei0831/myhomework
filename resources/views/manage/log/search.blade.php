@@ -5,7 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">{{ trans('action.log.title').trans('action.manage') }}</div>
+                <div class="card-header text-white bg-info">
+                    <h4><i class="fas fa-clipboard-list"></i> {{ trans('action.log.title').' '.trans('action.manage') }}</h4>
+                </div>
                 <div class="card-body">
                 	<form action="{{ route('log.search') }}" method="post">
 					@csrf
