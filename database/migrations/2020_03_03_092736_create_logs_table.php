@@ -22,7 +22,7 @@ class CreateLogsTable extends Migration
             $table->string('browser_detail')->comment('瀏覽器詳細資料');
             $table->string('action')->comment('動作');
             $table->string('table')->comment('資料表');
-            $table->json('data')->comment('資料');
+            $table->longText('data')->comment('資料');
             $table->timestamps();
         });
     }
