@@ -35,14 +35,14 @@ class UploadController extends Controller
         $student = $request->student_id;
         $homework = $request->homework;
 
-        $student_id = DB::table('students')->where('student_id', $student)->first();
-        $homework_id = DB::table('homeworks')->where('subject', $homework)->first();
+        $student_id = DB::table('students')->where('student_id', 'like', '%' . $student . '%')->first();
+        $homework_id = DB::table('homeworks')->where('subject', 'like', '%' . $homework . '%')->first();
 
-        $uploads_search = Upload::when($student, function ($q) use ($student_id) {
-            return $q->where('student_id', 'like', '%' . $student_id->id . '%');
+        $uploads_search = Upload::when($student, function ($q) use ($student_id, $student) {
+            return $q->where('student_id', 'like', '%' . (empty($student_id)?$student:$student_id->id) . '%');
         })
-        ->when($homework, function ($q) use ($homework_id) {
-            return $q->where('homework_id', 'like', '%' . $homework_id->id . '%');
+        ->when($homework, function ($q) use ($homework_id, $homework) {
+            return $q->where('homework_id', 'like', '%' . (empty($homework_id)?$homework:$homework_id->id) . '%');
         })
         ->paginate()
         ->appends($request->all());

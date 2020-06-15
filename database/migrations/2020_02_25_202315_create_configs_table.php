@@ -34,7 +34,6 @@ class CreateConfigsTable extends Migration
             'font_family' => 'Helvetica, Arial',
             'font_size' => 'large',
             'font_weight' => '200',
-            'background' => 'null',
             'background_color' => 'null',
             'navbar_wcolor' => 'fff',
             'navbar_hcolor' => 'fff',
