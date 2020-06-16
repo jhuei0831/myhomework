@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,8 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $students = Student::where('student_id', Auth::user()->student_id)->get();
+        $courses = [];
+        $students = Student::where('student_id', Auth::user()->student_id)->get('course');
+        foreach ($students as $key => $value) {
+            array_push($courses, $value->course);
+        }
+        $homeworks = DB::table('homeworks')
+            ->leftJoin('uploads', 'homeworks.id', '=', 'uploads.homework_id')
+            ->whereIn('course', $courses)
+            ->where('uploads.student_id', '2')
+            ->get();
 
-        return view('home',compact('students'));
+        return view('home',compact('courses','homeworks'));
     }
 }

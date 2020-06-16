@@ -18,10 +18,4 @@ class Student extends Model
     {
         return $this->hasMany('App\Homework', 'course', 'course');
     }
-
-    public function uploads()
-    {
-        return $this->hasMany('App\Upload', 'student_id', 'id');
-    }
-
 }

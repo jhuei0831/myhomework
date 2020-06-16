@@ -127,7 +127,7 @@ class HomeworkController extends Controller
 
         $data = $request->validate([
             'course' => ['required'],
-            'subject' => ['required','unique:homeworks'],
+            'subject' => ['required'],
             'description' => ['required'],
             'deadline' => ['required'],
         ]);

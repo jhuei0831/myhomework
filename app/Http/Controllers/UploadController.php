@@ -6,6 +6,9 @@ use App\Upload;
 use App\Log;
 use App\Student;
 use App\Homework;
+use ZipArchive;
+use RecursiveIteratorIterator;
+use RecursiveDirectoryIterator;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -160,5 +163,29 @@ class UploadController extends Controller
             $upload->save();
             return back()->with('success', 'action.upload.success');
         }      
+    }
+
+    public function zip()
+    {
+        $zip_file = '123.zip'; 
+
+        $zip = new ZipArchive();
+        $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+        $path = public_path().'/storage/uploads/homework/微積分作業1';
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
+        foreach ($files as $name => $file) {
+            if (!$file->isDir()) {
+                $filePath = $file->getRealPath();
+                $relativePath = '微積分作業1/' . substr($filePath, strlen($path) + 1);
+                $zip->addFile($filePath, $relativePath);
+            }
+        }
+
+        // $invoice_file = '/storage/uploads/homework/微積分作業1/7106093035.pdf';
+
+        // $zip->addFile(public_path().$invoice_file, $invoice_file);
+        $zip->close();
+
+        return response()->download($zip_file);
     }
 }

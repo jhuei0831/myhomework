@@ -19,7 +19,7 @@
 
                         <div class="form-group">
                             <label for="subject">{{ trans('action.homework.subject') }}</label>
-                            <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{ $homework->subject }}" required autocomplete="{{ trans('subject') }}" autofocus>
+                            <input id="subject" type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{ $homework->subject }}" required autocomplete="{{ trans('subject') }}" autofocus readonly>
 
                             @error('subject')
                                 <span class="invalid-feedback" role="alert">

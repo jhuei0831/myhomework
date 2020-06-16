@@ -23,7 +23,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($students as $student)
+                                @php
+                                    print_r($homeworks);
+                                @endphp
+                                {{-- @foreach ($students as $student)
                                     @foreach ($student->homeworks as $homework)
                                         <tr>
                                             <td>{{ $homework->subject }}</td>
@@ -31,15 +34,15 @@
                                                 <button data-toggle="collapse" class="btn btn-sm des" value="{!! $homework->description !!}" href="#{{ $homework->id }}" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-eye"></i></button>
                                             </td>
                                             <td>{{ $homework->deadline }}</td>
-                                            @if (json_encode($student->uploads) != '[]')
-                                                @foreach ($student->uploads as $upload)
+                                            @if (json_encode($homework->uploads) != '[]')
+                                                @foreach ($homework->uploads as $upload)
                                                     @if ($upload->homework_id == $homework->id)
                                                         <td>{{ $upload->updated_at }}&nbsp;</td>
                                                         <td>
                                                             <a href="#" data-toggle="collapse" data-target="#{{ $homework->subject }}" aria-expanded="true" aria-controls="collapseOne"><i class="fas fa-file-upload"></i></a>
                                                             <a target='_blank' href="{{ asset('storage/uploads/homework/'.$homework->subject.'/'.$upload->file) }}"><i class="fas fa-file-alt"></i></a>
                                                         </td>
-                                                        <td>{{ $upload->grade }}</td>                                                    
+                                                        <td>{{ $upload->grade }}</td>                                                     
                                                     @endif 
                                                 @endforeach     
                                             @else
@@ -72,7 +75,7 @@
                                             </td>
                                         </tr>  
                                     @endforeach
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>

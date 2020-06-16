@@ -18,4 +18,9 @@ class Homework extends Model
     {
         return $this->belongsTo('App\Student', 'course', 'course');
     }
+
+    public function uploads()
+    {
+        return $this->hasMany('App\Upload', 'homework_id', 'id');
+    }
 }
