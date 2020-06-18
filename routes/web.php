@@ -60,9 +60,6 @@ Route::prefix('manage')->middleware('auth')->group(function(){
 
 //在各視圖中可直接使用以下參數
 View::composer(['*'], function ($view) {
-    if (Auth::check()) {
-        $student = DB::table('students')->where('student_id', Auth::user()->student_id)->first();
-    }
     $config = DB::table('configs')->where('id','1')->first();
     Config::set('app.name', $config->app_name);
     $infos = Info::where('is_sticky',0)->where('is_open',1)->orderby('updated_at')->paginate(10);

@@ -26,17 +26,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $courses = [];
-        $students = Student::where('student_id', Auth::user()->student_id)->get('course');
-        foreach ($students as $key => $value) {
-            array_push($courses, $value->course);
+        $student_id = [];
+        $student_courses = [];
+        $student_homeworks = [];
+        $students = Student::where('student_id', Auth::user()->student_id)->get();
+        foreach ($students as $student) {
+            array_push($student_id, $student->id);
         }
-        $homeworks = DB::table('homeworks')
-            ->leftJoin('uploads', 'homeworks.id', '=', 'uploads.homework_id')
-            ->whereIn('course', $courses)
-            ->where('uploads.student_id', '2')
-            ->get();
+        foreach ($students as $student) {
+            array_push($student_courses, $student->course);
+        }
+        $homeworks = DB::table('homeworks')->whereIn('course', $student_courses)->get();
+        foreach ($homeworks as $homework) {
+            array_push($student_homeworks, $homework->id);
+        }
+        $uploads = DB::table('uploads')->whereIn('homework_id',$student_homeworks)->whereIn('student_id',$student_id)->get();
 
-        return view('home',compact('courses','homeworks'));
+
+        return view('home',compact('students','homeworks','uploads'));
     }
 }
