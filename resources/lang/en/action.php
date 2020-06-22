@@ -33,6 +33,7 @@ return [
     'update_success' => 'Successfully Updated !',
     'upload' => 'Upload',
     'yes' => 'Yes',
+    'zip' => 'ZIP Download',
 
     'news' => 'News',
 

@@ -32,6 +32,7 @@ return [
     'search' => '搜尋',
     'update_success' => '更新成功!',
     'yes' => '是',
+    'zip' => '壓縮下載',
 
     'news' => '最新消息',
 

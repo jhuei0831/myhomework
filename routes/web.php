@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function() {
     Route::any('manage/student/upload', 'StudentController@import')->name('student.import');
     Route::post('homework/{id}/{student_id}', 'UploadController@upload')->name('homework.upload');
     //zip
-    Route::get('manage/upload/zip', 'UploadController@zip')->name('upload.zip');
+    Route::get('manage/upload/zip/{folder}', 'UploadController@zip')->name('upload.zip');
 });
 
 // Manage

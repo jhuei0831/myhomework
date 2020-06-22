@@ -7,8 +7,7 @@ use App\Log;
 use App\Student;
 use App\Homework;
 use ZipArchive;
-use RecursiveIteratorIterator;
-use RecursiveDirectoryIterator;
+use File;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -165,27 +164,19 @@ class UploadController extends Controller
         }      
     }
 
-    public function zip()
+    public function zip($folder)
     {
-        $zip_file = '123.zip'; 
-
-        $zip = new ZipArchive();
-        $zip->open($zip_file, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-        $path = public_path().'/storage/uploads/homework/微積分作業1';
-        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
-        foreach ($files as $name => $file) {
-            if (!$file->isDir()) {
-                $filePath = $file->getRealPath();
-                $relativePath = '微積分作業1/' . substr($filePath, strlen($path) + 1);
-                $zip->addFile($filePath, $relativePath);
+        $zip = new ZipArchive;
+        $fileName = $folder.'.zip';
+        if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+        {
+            $files = File::files(public_path('storage/uploads/homework/'.$folder));
+            foreach ($files as $key => $value) {
+                $relativeNameInZipFile = basename($value);
+                $zip->addFile($value, $relativeNameInZipFile);
             }
+            $zip->close();
         }
-
-        // $invoice_file = '/storage/uploads/homework/微積分作業1/7106093035.pdf';
-
-        // $zip->addFile(public_path().$invoice_file, $invoice_file);
-        $zip->close();
-
-        return response()->download($zip_file);
+        return response()->download(public_path($fileName));
     }
 }

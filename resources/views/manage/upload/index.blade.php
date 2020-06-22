@@ -14,6 +14,9 @@
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <a class="btn btn-sm btn-primary" data-toggle="collapse" href="#search" role="button" aria-expanded="false" aria-controls="search"><i class="fas fa-filter"></i> {{ trans('action.filter') }}</a>
+							</li>
+							<li class="list-inline-item">
+                                <a class="btn btn-sm btn-primary zip" href="#"><i class="fas fa-file-archive"></i> {{ trans('action.zip') }}</a>
                             </li>
                         </ul>
                         {{-- 篩選器設定 --}}
@@ -76,3 +79,31 @@
     </div>
 </div>
 @endsection
+@section('script')
+@parent
+<script>
+	$('.zip').on('click',function () {
+		(async () => {
+			const { value: formValues } = await Swal.fire({
+				title: '{{ trans("action.choose") }}',
+				html: '<select class="form-control" id="homework">@foreach ($uploads as $upload)<option>{{ $upload->homework->subject }}</option>@endforeach</select>',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '{{ trans('action.confirm') }}',
+				cancelButtonText: '{{ trans('action.cancel') }}',
+				showCloseButton: true,
+				preConfirm: () => {
+					return [
+						document.getElementById('homework').options[document.getElementById('homework').selectedIndex].value,
+					]
+				}
+			})
+			if (formValues) {
+				let url = "{{ route('upload.zip',':homework') }}"
+				window.location.href = url.replace(':homework', formValues);
+			}
+		})()
+	});
+</script>	
+@show
