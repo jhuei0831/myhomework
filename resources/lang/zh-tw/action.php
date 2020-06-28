@@ -8,6 +8,7 @@ return [
     'create' => '新增',
     'create_success' => '新增成功!',
     'choose' => '請選擇',
+    'choose_error' => '尚未選擇',
     'confirm' => '確認',
     'cancel' => '取消',
     'check' => '請確認表單中的錯誤!',
@@ -59,6 +60,12 @@ return [
         'description' => '課程大綱',
     ],
 
+    'export' => [
+        'export' => '匯出',
+        'success' => '匯出成功',
+        'failed' => '匯出失敗',
+    ],
+
     'homework' => [
         'homework' => '作業',
         'course' => '課程',
@@ -67,7 +74,6 @@ return [
         'deadline' => '截止日期',
         'notice1' => '點擊題目查看敘述。',
     ],
-
 
     'import' => [
         'import' => '匯入',

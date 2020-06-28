@@ -41,8 +41,10 @@ Route::middleware('auth')->group(function() {
     Route::any('manage/student/import', function () {return view('manage.student.import');});
     Route::any('manage/student/upload', 'StudentController@import')->name('student.import');
     Route::post('homework/{id}/{student_id}', 'UploadController@upload')->name('homework.upload');
-    //zip
+    //Zip
     Route::get('manage/upload/zip/{folder}', 'UploadController@zip')->name('upload.zip');
+    //Export
+    Route::any('manage/upload/export/{homework}', 'UploadController@export')->name('upload.export');
 });
 
 // Manage

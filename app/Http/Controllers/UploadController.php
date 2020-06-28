@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use ZipArchive;
+use File;
 use App\Upload;
 use App\Log;
 use App\Student;
 use App\Homework;
-use ZipArchive;
-use File;
+use App\Imports\UploadImport;
+use App\Exports\UploadsExport;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UploadController extends Controller
 {
@@ -178,5 +181,35 @@ class UploadController extends Controller
             $zip->close();
         }
         return response()->download(public_path($fileName));
+    }
+
+    public function export($homework) 
+    {
+        $homework_id = DB::table('homeworks')->where('subject', $homework)->first();
+        if (isset($homework_id->id)) {
+            Log::write_log('uploads', $homework, 'action.export.success');
+
+            return Excel::download(new UploadsExport($homework_id->id), 'Excel-reports.xlsx');
+        }
+        else{
+            Log::write_log('uploads', $homework, 'action.export.failed');
+            return redirect('manage/upload')->with('error', 'action.upload.genius');
+        }
+    }
+
+    public function import(Request $request)
+    {
+        $import = new UploadImport();
+        $import->import(request()->file('file'));
+        $failures = $import->failures();
+        if (json_encode($failures, JSON_UNESCAPED_UNICODE) != '[]') {
+            // 寫入log
+            Log::write_log('students', 'students', 'action.import.failed');
+            return view('manage.student.import', compact('failures'));
+        } else {
+            // 寫入log
+            Log::write_log('students', 'students', 'action.import.success');
+            return back()->with('success', 'action.import.success');
+        }
     }
 }

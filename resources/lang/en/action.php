@@ -8,6 +8,7 @@ return [
     'create' => 'Create',
     'create_success' => 'Successfully Created !',
     'choose' => 'Please Choose ',
+    'choose_error' => 'Please Choose',
     'confirm' => 'Confirm',
     'cancel' => 'Cancel',
     'check' => 'Please check the form below for errors !',
@@ -58,6 +59,12 @@ return [
         'name' => 'Name',
         'teacher' => 'Teacher',
         'description' => 'Description',
+    ],
+
+    'export' => [
+        'export' => 'Export',
+        'success' => 'Export Success',
+        'failed' => 'Export Failed',
     ],
 
     'homework' => [
