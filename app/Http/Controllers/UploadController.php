@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Storage;
 
 class UploadController extends Controller
 {
@@ -182,7 +183,7 @@ class UploadController extends Controller
         }
         return response()->download(public_path($fileName));
     }
-
+    
     public function export($homework) 
     {
         $homework_id = DB::table('homeworks')->where('subject', $homework)->first();
