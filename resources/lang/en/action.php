@@ -81,6 +81,8 @@ return [
         'success' => 'Successfully Import',
         'failed' => 'Import Failed',
         'not_exist' => 'This course is not exist !',
+        'not_exist2' => 'This student is not exist !',
+        'not_exist3' => 'This homework is not exist !',
         'id_duplicate' => 'Student ID duplicate !',
         'some_errors' => 'Some columns failed verification and the following problems occurred, others have been imported !',
     ],

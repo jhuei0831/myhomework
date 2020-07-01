@@ -80,6 +80,8 @@ return [
         'success' => '匯入成功',
         'failed' => '匯入失敗',
         'not_exist' => '該課程不存在!',
+        'not_exist2' => '該學生不存在!',
+        'not_exist3' => '該作業不存在!',
         'id_duplicate' => '學號重複!',
         'some_errors' => '有幾行沒通過驗證出現以下問題，其餘已匯入!',
     ],

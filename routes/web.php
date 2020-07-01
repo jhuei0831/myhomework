@@ -39,7 +39,9 @@ Route::middleware('auth')->group(function() {
     Route::any('manage/upload/search', 'UploadController@search')->name('upload.search');
     //上傳
     Route::any('manage/student/import', function () {return view('manage.student.import');});
+    Route::any('manage/upload/import', function () {return view('manage.upload.import');});
     Route::any('manage/student/upload', 'StudentController@import')->name('student.import');
+    Route::any('manage/upload/upload', 'UploadController@import')->name('upload.import');
     Route::post('homework/{id}/{student_id}', 'UploadController@upload')->name('homework.upload');
     //Zip
     Route::get('manage/upload/zip/{folder}', 'UploadController@zip')->name('upload.zip');

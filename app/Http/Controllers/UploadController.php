@@ -8,7 +8,7 @@ use App\Upload;
 use App\Log;
 use App\Student;
 use App\Homework;
-use App\Imports\UploadImport;
+use App\Imports\UploadsImport;
 use App\Exports\UploadsExport;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
@@ -200,16 +200,17 @@ class UploadController extends Controller
 
     public function import(Request $request)
     {
-        $import = new UploadImport();
+        $import = new UploadsImport();
         $import->import(request()->file('file'));
         $failures = $import->failures();
         if (json_encode($failures, JSON_UNESCAPED_UNICODE) != '[]') {
             // 寫入log
-            Log::write_log('students', 'students', 'action.import.failed');
-            return view('manage.student.import', compact('failures'));
+            Log::write_log('uploads', 'uploads', 'action.import.failed');
+            return view('manage.upload.import', compact('failures'));
         } else {
             // 寫入log
-            Log::write_log('students', 'students', 'action.import.success');
+            Log::write_log('uploads', 'uploads', 'action.import.success');
+            
             return back()->with('success', 'action.import.success');
         }
     }

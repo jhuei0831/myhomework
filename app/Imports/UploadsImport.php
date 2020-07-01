@@ -3,6 +3,8 @@
 namespace App\Imports;
 
 use App\Upload;
+use App\Enum;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +16,7 @@ use Maatwebsite\Excel\Concerns\SkipsFailures;
 
 class UploadsImport implements ToModel, WithValidation, SkipsOnFailure
 {
-    use SkipsFailures;
+    use Importable, SkipsFailures;
 
     /**
     * @param array $row
@@ -23,8 +25,37 @@ class UploadsImport implements ToModel, WithValidation, SkipsOnFailure
     */
     public function model(array $row)
     {
-        return new Upload([
-            //
-        ]);
+        $student = DB::table('students')->where('student_id', $row[0])->get();
+        $homework = DB::table('homeworks')->where('subject', $row[1])->get();
+        $upload = Upload::where('student_id', $student[0]->id)->where('homework_id', $homework[0]->id)->get();
+        if ($student->isNotEmpty() && $homework->isNotEmpty()) {
+            $upload = Upload::where('student_id', $student[0]->id)->where('homework_id', $homework[0]->id)->get();
+        }
+        else {
+            return NULL;
+        }  
+        if ($upload->isNotEmpty()) {
+            return Upload::updateOrCreate(array('student_id' => $student[0]->id, 'homework_id' => $homework[0]->id), array('grade' => $row[2]));
+        } 
+        else {
+            return NULL;
+        } 
+    }
+
+    public function rules(): array
+    {
+        return [
+            '0' => ['required', 'exists:students,student_id'],
+            '1' => ['required', 'exists:homeworks,subject'],
+            '2' => ['required'],
+        ];
+    }
+
+    public function customValidationMessages()
+    {
+        return [
+            '0.exists' => 'action.import.not_exist2',
+            '1.exists' => 'action.import.not_exist3',
+        ];
     }
 }

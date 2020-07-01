@@ -20,7 +20,8 @@
 							</li>
 							<li class="list-inline-item">
                                 <a class="btn btn-sm btn-primary export" href="#"><i class="fas fa-file-export"></i> {{ trans('action.export.export') }}</a>
-                            </li>
+							</li>
+							<li class="list-inline-item">{{ App\Button::Import() }}</li>
                         </ul>
                         {{-- 篩選器設定 --}}
                         <div class="collapse" id="search">
