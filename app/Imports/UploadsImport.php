@@ -18,6 +18,8 @@ class UploadsImport implements ToModel, WithValidation, SkipsOnFailure
 {
     use Importable, SkipsFailures;
 
+    public $data;
+    public $rows = 1;
     /**
     * @param array $row
     *
@@ -25,6 +27,7 @@ class UploadsImport implements ToModel, WithValidation, SkipsOnFailure
     */
     public function model(array $row)
     {
+        ++$this->rows;
         $student = DB::table('students')->where('student_id', $row[0])->get();
         $homework = DB::table('homeworks')->where('subject', $row[1])->get();
         $upload = Upload::where('student_id', $student[0]->id)->where('homework_id', $homework[0]->id)->get();
@@ -38,12 +41,16 @@ class UploadsImport implements ToModel, WithValidation, SkipsOnFailure
             return Upload::updateOrCreate(array('student_id' => $student[0]->id, 'homework_id' => $homework[0]->id), array('grade' => $row[2]));
         } 
         else {
+            $this->data = $row[0].$row[1].'no';
             return NULL;
         } 
     }
 
     public function rules(): array
     {
+        // $student = DB::table('students')->where('student_id', $row['student_id'])->first();
+        // $homework = DB::table('homeworks')->where('subject', $row['homework_id'])->first();
+
         return [
             '0' => ['required', 'exists:students,student_id'],
             '1' => ['required', 'exists:homeworks,subject'],

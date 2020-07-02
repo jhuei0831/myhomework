@@ -200,9 +200,13 @@ class UploadController extends Controller
 
     public function import(Request $request)
     {
-        $import = new UploadsImport();
+        $import = new UploadsImport();        
         $import->import(request()->file('file'));
         $failures = $import->failures();
+        if ($import->data != null) {
+            return back()->with('error', $import->data);
+            // dd($import->data);
+        }
         if (json_encode($failures, JSON_UNESCAPED_UNICODE) != '[]') {
             // 寫入log
             Log::write_log('uploads', 'uploads', 'action.import.failed');
