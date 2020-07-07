@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Upload;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -24,7 +25,12 @@ class UploadsExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
     */
     public function collection()
     {
-        return Upload::select()->where('homework_id', $this->homework_id)->get();
+        return DB::table('uploads')
+                ->join('homeworks', 'uploads.homework_id', '=', 'homeworks.id')
+                ->join('students', 'uploads.student_id', '=', 'students.id')
+                ->where('uploads.homework_id', $this->homework_id)
+                ->select('uploads.id', 'students.name', 'homeworks.subject', 'uploads.file', 'uploads.grade', 'uploads.created_at', 'uploads.updated_at',)
+                ->get();
     }
 
     public function registerEvents(): array
